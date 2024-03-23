@@ -1,0 +1,393 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Lusensec的小窝</title><meta name="author" content="Lusen"><meta name="copyright" content="Lusen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="学海无涯">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lusensec的小窝">
+<meta property="og:url" content="https://lusensec.gitee.io/page/3/index.html">
+<meta property="og:site_name" content="Lusensec的小窝">
+<meta property="og:description" content="学海无涯">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lusensec.gitee.io/img/logo.jpg">
+<meta property="article:author" content="Lusen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lusensec.gitee.io/img/logo.jpg"><link rel="shortcut icon" href="/img/logo-rem.png"><link rel="canonical" href="https://lusensec.gitee.io/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Lusensec的小窝',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-03-23 18:52:44'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="/img/logo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">38</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><i class="fa-fw fas fa-folder-open"></i><span> 基础知识</span></a></li><li><a class="site-page child" href="/categories/%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F"><i class="fa-fw fas fa-folder-open"></i><span> 靶场渗透</span></a></li><li><a class="site-page child" href="/categories/%E7%BA%A2%E9%98%9F%E5%85%A5%E4%BE%B5"><i class="fa-fw fas fa-folder-open"></i><span> 红队入侵</span></a></li><li><a class="site-page child" href="/categories/%E8%93%9D%E9%98%9F%E5%BA%94%E6%80%A5"><i class="fa-fw fas fa-folder-open"></i><span> 蓝队应急</span></a></li><li><a class="site-page child" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><i class="fa-fw fas fa-folder-open"></i><span> 漏洞复现</span></a></li><li><a class="site-page child" href="/categories/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86"><i class="fa-fw fas fa-folder-open"></i><span> 痕迹清理</span></a></li><li><a class="site-page child" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><i class="fa-fw fas fa-folder-open"></i><span> 内网渗透</span></a></li><li><a class="site-page child" href="/categories/%E5%85%8D%E6%9D%80%E4%B8%93%E6%A0%8F"><i class="fa-fw fas fa-folder-open"></i><span> 免杀专栏</span></a></li><li><a class="site-page child" href="/categories/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7"><i class="fa-fw fas fa-folder-open"></i><span> 安全工具</span></a></li><li><a class="site-page child" href="/categories/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%99%A8"><i class="fa-fw fas fa-folder-open"></i><span> 漏洞扫描器</span></a></li><li><a class="site-page child" href="/categories/%E8%AF%BE%E5%A4%96%E7%BB%8F%E9%AA%8C"><i class="fa-fw fas fa-folder-open"></i><span> 课外经验</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/background.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Lusensec的小窝"><span class="site-name">Lusensec的小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><i class="fa-fw fas fa-folder-open"></i><span> 基础知识</span></a></li><li><a class="site-page child" href="/categories/%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F"><i class="fa-fw fas fa-folder-open"></i><span> 靶场渗透</span></a></li><li><a class="site-page child" href="/categories/%E7%BA%A2%E9%98%9F%E5%85%A5%E4%BE%B5"><i class="fa-fw fas fa-folder-open"></i><span> 红队入侵</span></a></li><li><a class="site-page child" href="/categories/%E8%93%9D%E9%98%9F%E5%BA%94%E6%80%A5"><i class="fa-fw fas fa-folder-open"></i><span> 蓝队应急</span></a></li><li><a class="site-page child" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><i class="fa-fw fas fa-folder-open"></i><span> 漏洞复现</span></a></li><li><a class="site-page child" href="/categories/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86"><i class="fa-fw fas fa-folder-open"></i><span> 痕迹清理</span></a></li><li><a class="site-page child" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><i class="fa-fw fas fa-folder-open"></i><span> 内网渗透</span></a></li><li><a class="site-page child" href="/categories/%E5%85%8D%E6%9D%80%E4%B8%93%E6%A0%8F"><i class="fa-fw fas fa-folder-open"></i><span> 免杀专栏</span></a></li><li><a class="site-page child" href="/categories/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7"><i class="fa-fw fas fa-folder-open"></i><span> 安全工具</span></a></li><li><a class="site-page child" href="/categories/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%99%A8"><i class="fa-fw fas fa-folder-open"></i><span> 漏洞扫描器</span></a></li><li><a class="site-page child" href="/categories/%E8%AF%BE%E5%A4%96%E7%BB%8F%E9%AA%8C"><i class="fa-fw fas fa-folder-open"></i><span> 课外经验</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Lusensec的小窝</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/Lusensec" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://wpa.qq.com/msgrd?v=3&amp;uin=811209815&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:811209815@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2024/02/19/Honeypot-Defense-Hfish/" title="【蜜罐】HFish蜜罐的搭建和使用"><img class="post-bg" src="/img/loading.gif" data-original="/img/18.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【蜜罐】HFish蜜罐的搭建和使用"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/19/Honeypot-Defense-Hfish/" title="【蜜罐】HFish蜜罐的搭建和使用">【蜜罐】HFish蜜罐的搭建和使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-02-19T06:44:10.000Z" title="发表于 2024-02-19 14:44:10">2024-02-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%93%9D%E9%98%9F%E5%BA%94%E6%80%A5/">蓝队应急</a></span></div><div class="content">HFish蜜罐的搭建和使用一、蜜罐介绍蜜罐根据能力分为：低交互蜜罐、中交互蜜罐、高交互蜜罐。是一种改变网络安全防御被动局面的一种主动防御技术，现已成为监测、分析网络威胁的主要技术手段，并逐渐演进为体系化的网络主动防御架构网络欺骗。通过与移动目标防御等防御技术结合，完全有可能创造出更加安全高效的主动防御体系，在网络安全防御中发挥更大作用。
+国家保密科技测评中心：https://www.gjbmj.gov.cn/n1/2021/1224/c411145-32316186.html
+二、HFish 蜜罐官网：https://hfish.net/
+提供Windows、Linux及Dcoker 下载。是一款社区型免费蜜罐，为用户提供可独立操作且实用可靠的中低交互蜜罐。用户需要先部署管理端，再通过管理端内置蜜罐节点或部署新节点。
+三、蜜罐部署1、部署环境我们以HFish 蜜罐为例，来进行部署
+部署环境：
+
+Centos7 的Linux 系统
+采用线下部署方式（方便内网环境）
+
+2、线下部署linux 部署帮助文档：Linux下载部署 (hfish.net)
+1、下载安装包
+
+2、在Centos7中 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/02/18/Linux-Hiding-Diamorphine/" title="Linux进程隐藏—Diamorphine"><img class="post-bg" src="/img/loading.gif" data-original="/img/17.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux进程隐藏—Diamorphine"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/18/Linux-Hiding-Diamorphine/" title="Linux进程隐藏—Diamorphine">Linux进程隐藏—Diamorphine</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-02-18T05:35:23.000Z" title="发表于 2024-02-18 13:35:23">2024-02-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/">痕迹清理</a></span></div><div class="content">Linux隐藏工具—Diamorphine零、Diamorphine 介绍Diamorphine 是一个Linux内核模块， 支持内核版本 2.6.x&#x2F;3.x&#x2F;4.x。可通过 uname -r 查看内核版本。
+当加载的时候， 模块是不可见的（lsmod 看不到）；通过发送31信号，可以达到隐藏和不隐藏进程的目的； 通过发送63信号，可以隐藏和不隐藏该内核模块； 通过发送64信号（给任何进程），可以将用户变成root； 如果文件或者目录以MAGIC_PREFIX开始，将会隐藏； 
+
+项目地址： https://github.com/m0nad/Diamorphine
+一、部署环境下载代码
+git clone https://github.com/m0nad/Diamorphine
+
+进入目录，开始编译
+cd Diamorphine; make
+
+加载内核模块
+insmod diamorphine.ko
+
+二、验证内核模块隐藏枚举加载的内核模块并检查 Diamorphine 是否存在列表中。
+
+上图内容如下所示： 
+步骤1：执行lsmod命令，diamorphine.k ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2024/02/18/Red-Team-Invasion_BadUSB/" title="BadUSB 近源攻击"><img class="post-bg" src="/img/loading.gif" data-original="/img/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BadUSB 近源攻击"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/18/Red-Team-Invasion_BadUSB/" title="BadUSB 近源攻击">BadUSB 近源攻击</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-02-18T03:48:43.474Z" title="发表于 2024-02-18 11:48:43">2024-02-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BA%A2%E9%98%9F%E5%85%A5%E4%BE%B5/">红队入侵</a></span></div><div class="content">U盘反弹shell制作—BadUSB攻击一、工具准备1、Arduino IDE（给badusb写入代码的软件工具）
+网盘已提供
+
+2、Badusb（U盘）
+(374)32U4 虚拟键盘 Badusb Leomardo USB ATMEGA32U4开发板单片
+
+3、可能出现的问题：
+一般来说，驱动正常，在设备管理器中可以看到如下：如果异常，针对不同型号的badusb 可以用驱动精灵下载对应的驱动
+
+
+二、开始编写
+打开IDE ，选择板子和接口
+
+在Arduino 1.5.5 版本中的设置：		1、在【工具】--&gt;【版】--&gt;【Arduino leonardo】		2、在【端口】--&gt;选择对应的端口
+
+程序介绍
+开发版中就只有两种函数：	setup()：就是插入badusb 之后执行的代码，执行一次。我们一般将攻击代码写入这里	loop()：是插入后循环执行的代码。如果不写明循环条件，就会一直循环执行代码，导致不好的结果（因此一般不用这个函数）			如：如果写入不断按F5的循环代码，可能插上后，电脑就会死机。Mouse.begin()//鼠标事件开始Mouse.click ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/02/17/Vulnhub-pipe/" title="【入侵靶场】Vulnhub-pipe靶场渗透"><img class="post-bg" src="/img/loading.gif" data-original="/img/15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【入侵靶场】Vulnhub-pipe靶场渗透"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/17/Vulnhub-pipe/" title="【入侵靶场】Vulnhub-pipe靶场渗透">【入侵靶场】Vulnhub-pipe靶场渗透</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-02-17T12:11:15.000Z" title="发表于 2024-02-17 20:11:15">2024-02-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/">靶场渗透</a></span></div><div class="content">Vulnhub-pipe 靶场渗透一、环境配置1、解决IP扫描不到问题
+2、打开虚拟机，并修改网络连接模式为【NAT】即可
+二、信息收集1、主机发现nmap.exe -sn 192.168.31.*
+
+
+2、端口扫描1、粗略快速扫描
+nmap.exe -F 192.168.31.63
+
+
+2、精细化扫描
+nmap.exe -sT --min-rate 10000 -p- 192.168.31.63nmap.exe -sU --min-rate 10000 -p- 192.168.31.63
+
+
+
+3、全扫描和漏洞扫描
+nmap.exe -sT -sV -sC -O -p22,80,111 192.168.31.63nmap.exe --script=vuln -p22,80,111 192.168.31.63
+
+
+22端口的ssh采用SSH-2协议的6.7p1版本，位于Debian 5操作系统上。80端口采用apache的http服务，标题是一个401未经许可的字样。111端口的是一个 RPC （远程过程调用）端口映射程序。
+
+似乎存CVE-2007-6750 漏洞
+3、web目录扫描 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2024/02/17/Vulnhub-Seattle-003/" title="【入侵靶场】Vulnhub-Seattle_003靶场渗透"><img class="post-bg" src="/img/loading.gif" data-original="/img/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【入侵靶场】Vulnhub-Seattle_003靶场渗透"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/17/Vulnhub-Seattle-003/" title="【入侵靶场】Vulnhub-Seattle_003靶场渗透">【入侵靶场】Vulnhub-Seattle_003靶场渗透</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-02-17T11:59:32.000Z" title="发表于 2024-02-17 19:59:32">2024-02-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/">靶场渗透</a></span></div><div class="content">Vulnhub_Seattle_003靶场渗透一、环境准备1、从百度网盘下载对应靶机的.ova镜像
+2、在VM中选择【打开】该.ova
+
+3、选择存储路径，并打开
+
+4、之后确认网络连接模式是否为【NAT】
+二、信息收集1、主机发现nmap.exe -sn 192.168.31.*
+
+
+2、端口探测1、快速粗略的扫描
+nmap.exe -F 192.168.31.59
+
+
+2、全端口精细扫描
+nmap.exe -sT --min-rate 10000 -p- 192.168.31.59nmap.exe -sU --min-rate 10000 -p- 192.168.31.59
+
+
+
+确认只开放了80端口
+3、全扫描和漏洞扫描
+nmap.exe -sT -sV -sC -O -p80 192.168.31.59nmap.exe -sT -sV -sC -O -p80 192.168.31.59
+
+
+确认是Linux的Fedora 系统，是由 Red Hat 公司赞助和领导
+
+漏洞脚本探测出来存在csrf 和sql注入漏洞，很显然，这个SQL注入漏洞是一个关键点
+3、web目录探测dir ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/02/17/Vulnhub-SecureCode1/" title="【红队入侵】Vulnhub-SecureCode1靶场渗透"><img class="post-bg" src="/img/loading.gif" data-original="/img/13.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【红队入侵】Vulnhub-SecureCode1靶场渗透"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/17/Vulnhub-SecureCode1/" title="【红队入侵】Vulnhub-SecureCode1靶场渗透">【红队入侵】Vulnhub-SecureCode1靶场渗透</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-02-17T11:53:52.000Z" title="发表于 2024-02-17 19:53:52">2024-02-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/">靶场渗透</a></span></div><div class="content">Vulnhub_SecureCode1靶场渗透一、环境配置1、从百度网盘下载对应靶机的.ova镜像
+2、在VM中选择【打开】该.ova
+
+3、选择存储路径，并打开
+
+4、之后确认网络连接模式是否为【NAT】
+二、信息收集1、主机发现
+2、端口探测1、快速粗略探测
+
+只发现80端口
+2、进行精细化探测
+
+
+仍然只有80端口
+3、进行全扫描和漏洞探测
+
+一个Ubuntu 的Linux机器	
+
+发现文件上传和SQL注入漏洞，是一个很好的开端
+3、对web目录爆破dirsearch.cmd -u http://192.168.31.61 -x 404,403	#过滤404，403响应
+
+
+4、web框架探测
+使用了Bootstrap 的前端开发框架和JQuery 库
+三、获取shell立足点1、查看敏感文件1、robots.txt：提示禁止去&#x2F;login&#x2F;*，不允许访问login下的任何文件
+
+2、login目录：是一个登录页面
+
+3、查看其他目录提示无权限
+
+2、源代码文件泄露1、对登录页面尝试SQL注入失败，几经周折无计可施
+2、返回再进行信息收集，端口探测也并无其他端 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2024/02/17/Vulnhub-Raven2/" title="【入侵靶场】Vulnhub-Raven2 靶场渗透"><img class="post-bg" src="/img/loading.gif" data-original="/img/12.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【入侵靶场】Vulnhub-Raven2 靶场渗透"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/17/Vulnhub-Raven2/" title="【入侵靶场】Vulnhub-Raven2 靶场渗透">【入侵靶场】Vulnhub-Raven2 靶场渗透</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-02-17T11:48:11.000Z" title="发表于 2024-02-17 19:48:11">2024-02-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/">靶场渗透</a></span></div><div class="content">Vulnhub_Raven2 渗透一、环境准备从网盘下载该靶机，在vm中选择【打开】
+
+然后设置好存储路径，开机后检查靶机的网络连接模式是否为【NET】模式。
+二、信息收集1、主机发现nmap.exe -sn 192.168.31.*
+
+
+2、端口扫描1、先进行粗略的扫描
+nmap.exe -F 192.168.31.60
+
+
+2、再进行精细化扫描
+nmap.exe -sT --min-rate 10000 -p- 192.168.31.60nmap.exe -sU --min-rate 10000 -p- 192.168.31.60
+
+
+
+3、进行全扫描和漏洞探测
+nmap.exe -sT -sV -sC -O -p 22,80,111,54798,58157 192.168.31.60 -oA AllPort nmap.exe --script=vuln -p 22,80,111,54798,58157 192.168.31.60 -oA VulnPort
+
+
+确认是Linux操作系统，并且开放了111的rpcbind服务，有关这个服务可以上网搜索，也有很多该服务相关漏洞，后期是一 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/02/17/Vulnhub-Silky-CTF-0x02/" title="【入侵靶场】Vulnhub_Silky-CTF靶场渗透"><img class="post-bg" src="/img/loading.gif" data-original="/img/11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【入侵靶场】Vulnhub_Silky-CTF靶场渗透"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/17/Vulnhub-Silky-CTF-0x02/" title="【入侵靶场】Vulnhub_Silky-CTF靶场渗透">【入侵靶场】Vulnhub_Silky-CTF靶场渗透</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-02-17T10:04:40.000Z" title="发表于 2024-02-17 18:04:40">2024-02-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/">靶场渗透</a></span></div><div class="content">Vulnhub_Silky-CTF_0x02 渗透一、环境配置从网盘下载该靶机，在vm中选择【打开】，选择“我已复制该虚拟机”。
+
+然后设置名称和存储路径，选择【重试】即可。
+
+之后配置靶机的网络连接模式为【NET】模式打开。
+二、信息收集1、主机发现先查看主机主机的IP信息，再通过nmap扫描存活主机。
+nmap -sn IP#发现目标192.168.31.54
+
+
+2、端口扫描对目标机器的端口进行扫描
+nmap.exe -F 192.168.31.54	#快速粗略扫描nmap.exe -p- -min-rate 1000 -sT 192.168.31.54	#以1000速率进行TCP详细扫描nmap.exe -p- -min-rate 1000 -sU 192.168.31.54	#以1000速率进行UDP详细扫描
+
+
+
+nmap -sT -sV -sC -O -Pn -p 22,80 192.168.31.54	#对目标开放端口及系统进行详细扫描
+
+
+目标是linux 的Debian系统、web采用apache服务。
+22端口可以进行爆破，但是作为web靶场，显然不是让我们这么做 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2024/02/17/Anti-AntiVirus-Webshell-rouji/" title="Webshell 免杀过360、D盾、河马"><img class="post-bg" src="/img/loading.gif" data-original="/img/10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Webshell 免杀过360、D盾、河马"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/17/Anti-AntiVirus-Webshell-rouji/" title="Webshell 免杀过360、D盾、河马">Webshell 免杀过360、D盾、河马</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-02-17T07:53:21.000Z" title="发表于 2024-02-17 15:53:21">2024-02-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%85%8D%E6%9D%80%E4%B8%93%E6%A0%8F/">免杀专栏</a></span></div><div class="content">Webshell 免杀过360、D盾、河马一、准备工作1、rouji脚本
+百度网盘可下载
+GitHub项目地址：https://github.com/ytMuCheng/ruoji 
+2、环境配置
+python3 的环境模块
+pip3 install -r re.txt
+
+二、免杀操作运行脚本：
+python webshell_bypass_5.1.py -c 1
+
+参数：
+optional arguments:  -h, --help            show this help message and exit  -p PHP, --php PHP     -p 文件名 or --php 文件名  -j JSP, --jsp JSP     -j 文件名 or --jsp 文件名  -c CONFIG, --config CONFIG                        伪装模板（1-7） -c 1 or --config 1
+
+1、方式一：免杀蚁剑1、蚁剑免杀
+python webshell_bypass_5.1.py -p shell.php	#shell.ph ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/02/17/Anti-AntiVirus-CS-shellcode/" title="CS-shellcode 免杀过360、火绒"><img class="post-bg" src="/img/loading.gif" data-original="/img/9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CS-shellcode 免杀过360、火绒"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/02/17/Anti-AntiVirus-CS-shellcode/" title="CS-shellcode 免杀过360、火绒">CS-shellcode 免杀过360、火绒</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-02-17T06:28:35.000Z" title="发表于 2024-02-17 14:28:35">2024-02-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%85%8D%E6%9D%80%E4%B8%93%E6%A0%8F/">免杀专栏</a></span></div><div class="content">CS-shellcode 免杀过360、火绒一、准备工作1、掩日（双击运行）
+
+2、cs 的shellcode
+
+二、免杀方式1、方式一：本地分离
+火绒绕过：
+
+
+360绕过：
+
+2、方式二、网络分离暂时搁置
+三、总结掩日是一款适用于红队的综合免杀工具，其中包括有：通用免杀、本地分离、网络分离等多种免杀方式和杀软识别等功能，操作简单，免杀效果强悍，是一个非常优秀的项目
+</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Lusen</div><div class="author-info__description">学海无涯</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">38</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Lusesec"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Lusensec" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://wpa.qq.com/msgrd?v=3&amp;uin=811209815&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:811209815@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章和相关工具仅供学习参考，禁止用于其他！！！未经授权禁止利用文章中的技术或工具对任何计算机或其他终端系统进行入侵操作，否则造成的直接或间接的后果和损失，均由使用者本人承担，本人不为此承担任何责任。如需转载或传播文章，需保证文章的完整性！文章如有侵权行为，请联系告知，我们会立即删除或修改并致歉！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/03/23/Emergency-Linux-web2/" title="【应急靶场】知攻善防Linux Web2靶场入侵排查"><img src="/img/loading.gif" data-original="/img/38.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【应急靶场】知攻善防Linux Web2靶场入侵排查"/></a><div class="content"><a class="title" href="/2024/03/23/Emergency-Linux-web2/" title="【应急靶场】知攻善防Linux Web2靶场入侵排查">【应急靶场】知攻善防Linux Web2靶场入侵排查</a><time datetime="2024-03-23T09:09:48.000Z" title="发表于 2024-03-23 17:09:48">2024-03-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/21/Emergency-Linux-web1/" title="【应急靶场】知攻善防Linux Web1靶场入侵排查"><img src="/img/loading.gif" data-original="/img/37.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【应急靶场】知攻善防Linux Web1靶场入侵排查"/></a><div class="content"><a class="title" href="/2024/03/21/Emergency-Linux-web1/" title="【应急靶场】知攻善防Linux Web1靶场入侵排查">【应急靶场】知攻善防Linux Web1靶场入侵排查</a><time datetime="2024-03-21T06:48:29.000Z" title="发表于 2024-03-21 14:48:29">2024-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/17/Red-Team-Invasion-ARP/" title="ARP欺骗攻击与防御"><img src="/img/loading.gif" data-original="/img/36.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ARP欺骗攻击与防御"/></a><div class="content"><a class="title" href="/2024/03/17/Red-Team-Invasion-ARP/" title="ARP欺骗攻击与防御">ARP欺骗攻击与防御</a><time datetime="2024-03-17T08:30:06.943Z" title="发表于 2024-03-17 16:30:06">2024-03-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/15/SafeLine-LeichiWAF/" title="【防火墙】雷池WAF的安装和使用"><img src="/img/loading.gif" data-original="/img/35.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【防火墙】雷池WAF的安装和使用"/></a><div class="content"><a class="title" href="/2024/03/15/SafeLine-LeichiWAF/" title="【防火墙】雷池WAF的安装和使用">【防火墙】雷池WAF的安装和使用</a><time datetime="2024-03-15T12:40:03.000Z" title="发表于 2024-03-15 20:40:03">2024-03-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/13/Emergency-WinServer-web3/" title="【应急靶场】Win Server Web3入侵排查"><img src="/img/loading.gif" data-original="/img/34.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【应急靶场】Win Server Web3入侵排查"/></a><div class="content"><a class="title" href="/2024/03/13/Emergency-WinServer-web3/" title="【应急靶场】Win Server Web3入侵排查">【应急靶场】Win Server Web3入侵排查</a><time datetime="2024-03-13T13:33:36.000Z" title="发表于 2024-03-13 21:33:36">2024-03-13</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%8D%E6%9D%80%E4%B8%93%E6%A0%8F/"><span class="card-category-list-name">免杀专栏</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"><span class="card-category-list-name">内网渗透</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><span class="card-category-list-name">基础知识</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/"><span class="card-category-list-name">安全工具</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"><span class="card-category-list-name">漏洞复现</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%99%A8/"><span class="card-category-list-name">漏洞扫描器</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%97%95%E8%BF%B9%E6%B8%85%E7%90%86/"><span class="card-category-list-name">痕迹清理</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BA%A2%E9%98%9F%E5%85%A5%E4%BE%B5/"><span class="card-category-list-name">红队入侵</span><span class="card-category-list-count">2</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Fastjson/" style="font-size: 1.1em; color: #999">Fastjson</a> <a href="/tags/git/" style="font-size: 1.1em; color: #999">git</a> <a href="/tags/%E7%BD%91%E7%9B%98/" style="font-size: 1.1em; color: #999">网盘</a> <a href="/tags/%E8%AF%BE%E5%A4%96%E7%BB%8F%E9%AA%8C/" style="font-size: 1.1em; color: #999">课外经验</a> <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%99%A8/" style="font-size: 1.1em; color: #999">漏洞扫描器</a> <a href="/tags/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/" style="font-size: 1.1em; color: #999">横向移动</a> <a href="/tags/webShell/" style="font-size: 1.1em; color: #999">webShell</a> <a href="/tags/%E8%BF%9B%E7%A8%8B%E9%9A%90%E8%97%8F/" style="font-size: 1.1em; color: #999">进程隐藏</a> <a href="/tags/Shiro/" style="font-size: 1.1em; color: #999">Shiro</a> <a href="/tags/%E5%A0%A1%E5%9E%92%E6%9C%BA/" style="font-size: 1.1em; color: #999">堡垒机</a> <a href="/tags/Log4j/" style="font-size: 1.1em; color: #999">Log4j</a> <a href="/tags/python/" style="font-size: 1.23em; color: #999ea6">python</a> <a href="/tags/%E8%9C%9C%E7%BD%90%E9%98%B2%E5%BE%A1/" style="font-size: 1.1em; color: #999">蜜罐防御</a> <a href="/tags/wireshark/" style="font-size: 1.1em; color: #999">wireshark</a> <a href="/tags/%E8%BF%91%E6%BA%90%E6%94%BB%E5%87%BB/" style="font-size: 1.1em; color: #999">近源攻击</a> <a href="/tags/%E5%A7%94%E6%B4%BE%E6%94%BB%E5%87%BB/" style="font-size: 1.1em; color: #999">委派攻击</a> <a href="/tags/ARP%E6%AC%BA%E9%AA%97/" style="font-size: 1.1em; color: #999">ARP欺骗</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%8D%E6%B1%87/" style="font-size: 1.1em; color: #999">基础词汇</a> <a href="/tags/TTL/" style="font-size: 1.1em; color: #999">TTL</a> <a href="/tags/%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5/" style="font-size: 1.37em; color: #99a4b2">入侵排查</a> <a href="/tags/%E5%85%8D%E6%9D%80/" style="font-size: 1.23em; color: #999ea6">免杀</a> <a href="/tags/Vulnhub/" style="font-size: 1.5em; color: #99a9bf">Vulnhub</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">11</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><span class="card-archive-list-count">27</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">38</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">44.8k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-03-23T10:52:44.720Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/background.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Lusen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, ))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  }
+}
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["闻道有先后","术业有专攻","积一勺以成江河","累微尘以崇峻极"])
+  } else {
+    document.getElementById("subtitle").textContent = "闻道有先后"
+  }
+}
+typedJSFn.run(subtitleType)</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="true" data-text="富强💖,民主💖,文明💖,和谐💖,平等💖,公正💖,法治💖,爱国💖,敬业💖,诚信💖,友善💖" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.12.0"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
