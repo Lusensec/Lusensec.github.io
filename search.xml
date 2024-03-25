@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【入侵靶场】Vulnhub Lampiao-1靶场渗透</title>
+      <link href="/2024/03/25/Vulnhub-Lampiao-1/"/>
+      <url>/2024/03/25/Vulnhub-Lampiao-1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Vulnhub-Lampiao-1靶场渗透"><a href="#Vulnhub-Lampiao-1靶场渗透" class="headerlink" title="Vulnhub Lampiao-1靶场渗透"></a>Vulnhub Lampiao-1靶场渗透</h1><h1 id="一、主机发现"><a href="#一、主机发现" class="headerlink" title="一、主机发现"></a>一、主机发现</h1><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325191522357.png" alt="image-20240325191522357"></p><h1 id="二、端口扫描"><a href="#二、端口扫描" class="headerlink" title="二、端口扫描"></a>二、端口扫描</h1><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325191550738.png" alt="image-20240325191550738"></p><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325193813636.png" alt="image-20240325193813636"></p><h1 id="三、web框架"><a href="#三、web框架" class="headerlink" title="三、web框架"></a>三、web框架</h1><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325193939435.png" alt="image-20240325193939435"></p><h1 id="四、web渗透"><a href="#四、web渗透" class="headerlink" title="四、web渗透"></a>四、web渗透</h1><h2 id="1、信息收集"><a href="#1、信息收集" class="headerlink" title="1、信息收集"></a>1、信息收集</h2><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325194110526.png" alt="image-20240325194110526"></p><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325194340461.png" alt="image-20240325194340461"></p><h2 id="2、目录扫描"><a href="#2、目录扫描" class="headerlink" title="2、目录扫描"></a>2、目录扫描</h2><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325200211393.png" alt="image-20240325200211393"></p><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325195457228.png" alt="image-20240325195457228"></p><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325195511227.png" alt="image-20240325195511227"></p><p>获得版本信息<code>7.56</code></p><h2 id="3、获取shell"><a href="#3、获取shell" class="headerlink" title="3、获取shell"></a>3、获取shell</h2><p>查找版本信息漏洞</p><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325200621885.png" alt="image-20240325200621885"></p><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325200645655.png" alt="image-20240325200645655"></p><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325200702213.png" alt="image-20240325200702213"></p><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325200709998.png" alt="image-20240325200709998"></p><h1 id="五、提权"><a href="#五、提权" class="headerlink" title="五、提权"></a>五、提权</h1><h2 id="1、提权至普通用户"><a href="#1、提权至普通用户" class="headerlink" title="1、提权至普通用户"></a>1、提权至普通用户</h2><p>找drupal 数据库的配置文件：</p><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325212457865.png" alt="image-20240325212457865"></p><p>提权到普通用户<code>tiago</code></p><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325212719463.png" alt="image-20240325212719463"></p><h2 id="2、提权到root"><a href="#2、提权到root" class="headerlink" title="2、提权到root"></a>2、提权到root</h2><p>脏牛提权：</p><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325212112731.png" alt="image-20240325212112731"></p><p>上传到靶机获取root 密码</p><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325212023647.png" alt="image-20240325212023647"></p><p><img src="/2024/03/25/Vulnhub-Lampiao-1/image-20240325212216152.png" alt="image-20240325212216152"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 靶场渗透 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Vulnhub </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【应急靶场】知攻善防Linux Web2靶场入侵排查</title>
       <link href="/2024/03/23/Emergency-Linux-web2/"/>
       <url>/2024/03/23/Emergency-Linux-web2/</url>
