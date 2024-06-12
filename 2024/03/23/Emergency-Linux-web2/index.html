@@ -1,0 +1,338 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【应急靶场】知攻善防Linux Web2靶场入侵排查 | Lusen的小窝</title><meta name="author" content="Lusen"><meta name="copyright" content="Lusen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="【应急靶场】知攻善防Linux Web2靶场入侵排查">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【应急靶场】知攻善防Linux Web2靶场入侵排查">
+<meta property="og:url" content="http://example.com/2024/03/23/Emergency-Linux-web2/index.html">
+<meta property="og:site_name" content="Lusen的小窝">
+<meta property="og:description" content="【应急靶场】知攻善防Linux Web2靶场入侵排查">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/%E5%BA%94%E6%80%A5.jpg">
+<meta property="article:published_time" content="2024-03-23T09:09:48.000Z">
+<meta property="article:modified_time" content="2024-06-11T13:36:28.058Z">
+<meta property="article:author" content="Lusen">
+<meta property="article:tag" content="入侵排查">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/%E5%BA%94%E6%80%A5.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/03/23/Emergency-Linux-web2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【应急靶场】知攻善防Linux Web2靶场入侵排查',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-06-11 21:36:28'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 7.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/friend_404.gif" data-original="/img/logo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E7%BA%A2%E9%98%9F%E5%85%A5%E4%BE%B5/"><i class="fa-fw fas fa-folder-open"></i><span> 红队入侵</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E8%93%9D%E9%98%9F%E5%BA%94%E6%80%A5/"><i class="fa-fw fas fa-folder-open"></i><span> 蓝队应急</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%AE%A1%E8%AE%A1/"><i class="fa-fw fas fa-folder-open"></i><span> 复现与审计</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 内网渗透</span></a></div><div class="menus_item"><a class="site-page" href="/categories/Python%E6%AD%A6%E5%99%A8%E5%BA%93/"><i class="fa-fw fas fa-folder-open"></i><span> Python武器库</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%85%8D%E6%9D%80%E4%B8%93%E6%A0%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 免杀专栏</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/Vulnhub%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Vulnhub系列靶场</span></a></li><li><a class="site-page child" href="/categories/OSCP%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> OSCP系列靶场</span></a></li><li><a class="site-page child" href="/categories/%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> 应急靶场</span></a></li><li><a class="site-page child" href="/categories/CTF%E7%AB%9E%E8%B5%9B/"><i class="fa-fw fas fa-folder-open"></i><span> CTF竞赛</span></a></li><li><a class="site-page child" href="/categories/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%99%A8/"><i class="fa-fw fas fa-folder-open"></i><span> 漏洞扫描器</span></a></li><li><a class="site-page child" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><i class="fa-fw fas fa-folder-open"></i><span> 基础知识</span></a></li><li><a class="site-page child" href="/categories/%E5%85%B6%E4%BB%96%E7%BB%8F%E9%AA%8C/"><i class="fa-fw fas fa-folder-open"></i><span> 其他经验</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/%E5%BA%94%E6%80%A5.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Lusen的小窝"><span class="site-name">Lusen的小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E7%BA%A2%E9%98%9F%E5%85%A5%E4%BE%B5/"><i class="fa-fw fas fa-folder-open"></i><span> 红队入侵</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E8%93%9D%E9%98%9F%E5%BA%94%E6%80%A5/"><i class="fa-fw fas fa-folder-open"></i><span> 蓝队应急</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%AE%A1%E8%AE%A1/"><i class="fa-fw fas fa-folder-open"></i><span> 复现与审计</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 内网渗透</span></a></div><div class="menus_item"><a class="site-page" href="/categories/Python%E6%AD%A6%E5%99%A8%E5%BA%93/"><i class="fa-fw fas fa-folder-open"></i><span> Python武器库</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%85%8D%E6%9D%80%E4%B8%93%E6%A0%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 免杀专栏</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/Vulnhub%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Vulnhub系列靶场</span></a></li><li><a class="site-page child" href="/categories/OSCP%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> OSCP系列靶场</span></a></li><li><a class="site-page child" href="/categories/%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> 应急靶场</span></a></li><li><a class="site-page child" href="/categories/CTF%E7%AB%9E%E8%B5%9B/"><i class="fa-fw fas fa-folder-open"></i><span> CTF竞赛</span></a></li><li><a class="site-page child" href="/categories/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%99%A8/"><i class="fa-fw fas fa-folder-open"></i><span> 漏洞扫描器</span></a></li><li><a class="site-page child" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><i class="fa-fw fas fa-folder-open"></i><span> 基础知识</span></a></li><li><a class="site-page child" href="/categories/%E5%85%B6%E4%BB%96%E7%BB%8F%E9%AA%8C/"><i class="fa-fw fas fa-folder-open"></i><span> 其他经验</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【应急靶场】知攻善防Linux Web2靶场入侵排查</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-23T09:09:48.000Z" title="发表于 2024-03-23 17:09:48">2024-03-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-11T13:36:28.058Z" title="更新于 2024-06-11 21:36:28">2024-06-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/">应急靶场</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【应急靶场】知攻善防Linux Web2靶场入侵排查"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="知攻善防Linux-Web2靶场入侵排查"><a href="#知攻善防Linux-Web2靶场入侵排查" class="headerlink" title="知攻善防Linux Web2靶场入侵排查"></a>知攻善防Linux Web2靶场入侵排查</h1><p><strong>前景需要：</strong>看监控的时候发现webshell告警，领导让你上机检查你可以救救安服仔吗！！</p>
+<p>1,提交攻击者IP</p>
+<p>2,提交攻击者修改的管理员密码(明文)</p>
+<p>3,提交第一次Webshell的连接URL(<a target="_blank" rel="noopener" href="http://xxx.xxx.xxx.xx/abcdefg?abcdefg%E5%8F%AA%E9%9C%80%E8%A6%81%E6%8F%90%E4%BA%A4abcdefg?abcdefg">http://xxx.xxx.xxx.xx/abcdefg?abcdefg只需要提交abcdefg?abcdefg</a>)</p>
+<p>3,提交Webshell连接密码</p>
+<p>4,提交数据包的flag1</p>
+<p>5,提交攻击者使用的后续上传的木马文件名称</p>
+<p>6,提交攻击者隐藏的flag2</p>
+<p>7,提交攻击者隐藏的flag3</p>
+<h1 id="一、环境配置"><a href="#一、环境配置" class="headerlink" title="一、环境配置"></a>一、环境配置</h1><p>靶场来自<code>知攻善防实验室</code>公众号：回复<code>靶机Linux2</code></p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322131714449.png" alt="image-20240322131714449"></p>
+<p>打开即可，靶机的启动界面如下，使用了多种方法无法进入桌面，根据该靶机的文件大小推测，该靶机没有安装图形界面</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322131908432.png" alt="image-20240322131908432"></p>
+<h1 id="二、账户安全"><a href="#二、账户安全" class="headerlink" title="二、账户安全"></a>二、账户安全</h1><p>检查<code>/etc/passwd</code>和<code>/etc/shadow</code>文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd | grep -v nologin        #查看可以登陆的用户</span><br><span class="line">awk &#x27;/\$1|\$6/&#123;print $1&#125;&#x27; /etc/shadow    #查看可以远程登陆的用户</span><br></pre></td></tr></table></figure>
+
+<img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322132303444.png" alt="image-20240322132303444" style="zoom:150%;" />
+
+<p>并无其他用户，查看下<code>/home</code>目录</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322132512661.png" alt="image-20240322132512661"></p>
+<p>有一个<code>www</code>用户，这莫不是web用户？存在于&#x2F;home目录下，属于是普通用户吗？查看www用户的shell环境</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322132715892.png" alt="image-20240322132715892"></p>
+<p>该www确实是属于普通用户，但是shell环境属于<code>/sbin/nologin</code>，不能进行正常登陆</p>
+<p>通过<code>who</code>命令查看下当前该机器登陆的用户有哪些（tty本地登陆 pts远程登录）</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322165437895.png" alt="image-20240322165437895"></p>
+<p>只有本地登录的roor 用户</p>
+<p>通过<code>last</code>命令排查最后登陆的时间，发现<code>192.168.20.1</code>这个可疑IP进行过多次远程登陆</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322212519592.png" alt="image-20240322212519592"></p>
+<h1 id="三、历史命令排查"><a href="#三、历史命令排查" class="headerlink" title="三、历史命令排查"></a>三、历史命令排查</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history          #查看root历史命令</span><br></pre></td></tr></table></figure>
+
+<p>但是这里有点坑，看不到上面的历史记录，是滑动不了的</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322133029147.png" alt="image-20240322133029147"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history | more       #通过more进行一页页命令的翻看</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322133330907.png" alt="image-20240322133330907"></p>
+<p>这里是关闭了防火墙，然后安装了宝塔，去www目录下看了看日志</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322133631229.png" alt="image-20240322133631229"></p>
+<p>这里是在<code>wwwroot/127.0.0.1</code>下面删除了flag1 跟 1，然后删除了<code>pe9.sql</code>文件，这个应该是数据库的一个sql文件，还执行过<code>docker ps</code>命令，这台机器还运行着docker ？</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322134129029.png" alt="image-20240322134129029"></p>
+<p>这里对网站根路径下的<code>.api</code>文件夹做了一些粘贴，之后从100行开始，逐渐不对劲起来</p>
+<p>在尝试增加一个<code>flag3&#123;5LourqoFt5d2zy0VUoVPJb0meVmoKgcy60Z&#125;</code>的用户，但是在<code>useradd: invalid user name &#39;flag3&#123;5LourqoFt5d2zy0VUoVPJb0meVmoKgcy60Z&#125;&#39;</code>的错误信息来看，应该是没有添加上。之后还对<code>/etc/profile</code>文件进行了编辑，应该是做了某些配置变量的修改，之后<code>source /etc/profile</code>重新加载配置变量</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322135823186.png" alt="image-20240322135823186"></p>
+<p>这里，root 的密码被进行了更改，并且有一个可疑的<code>wp</code>文件被执行，后面是我的排查操作</p>
+<p>那么针对flag3那个用户有没有创建成功，再看一下<code>/etc/passwd</code>文件</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322140038907.png" alt="image-20240322140038907"></p>
+<p>确实不存在flag3用户，只存在www和mysql 的普通用户</p>
+<h1 id="四、端口、进程排查"><a href="#四、端口、进程排查" class="headerlink" title="四、端口、进程排查"></a>四、端口、进程排查</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -antlp | more</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322140142066.png" alt="image-20240322140142066"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pa -aux  #查看进程</span><br><span class="line">top -c -o %CPU     #实时查看高CPU进程</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322140225599.png" alt="image-20240322140225599"></p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322140307183.png" alt="image-20240322140307183"></p>
+<h1 id="五、开机启动项排查"><a href="#五、开机启动项排查" class="headerlink" title="五、开机启动项排查"></a>五、开机启动项排查</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/rc.local</span><br><span class="line">/etc/profile</span><br><span class="line">~/.bashrc</span><br><span class="line">等</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322140615795.png" alt="image-20240322140615795"></p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322163635815.png" alt="image-20240322163635815"></p>
+<p>在<code>/etc/profile</code>文件中发现<code>flag3=&quot;flag&#123;5LourqoFt5d2zyOVUoVPJbOmeVmoKgcy6OZ&#125;&quot;</code></p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322191053732.png" alt="image-20240322191053732"></p>
+<h1 id="六、定时任务排查"><a href="#六、定时任务排查" class="headerlink" title="六、定时任务排查"></a>六、定时任务排查</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">crontab -l</span><br><span class="line">cat /var/spool/cron/*</span><br><span class="line">cat /etc/crontab</span><br><span class="line">cat /etc/cron.d/*</span><br><span class="line">cat /etc/cron.daiy/*</span><br><span class="line">cat /etc/cron.weekly/*</span><br><span class="line">cat /etc/cron.monthly/*</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322163802313.png" alt="image-20240322163802313"></p>
+<h1 id="七、日志排查"><a href="#七、日志排查" class="headerlink" title="七、日志排查"></a>七、日志排查</h1><h2 id="1、系统安全日志审计"><a href="#1、系统安全日志审计" class="headerlink" title="1、系统安全日志审计"></a>1、系统安全日志审计</h2><p>安全日志文件存放路径：<code>/var/log/secure</code>，是ssh登陆成功与否的一个安全日志</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat secure | grep &quot;Failed&quot; | awk &#x27;&#123;print $11&#125;&#x27; | sort | uniq -c | sort -nr   #统计IP爆破次数</span><br><span class="line">cat secure | grep &quot;Failed password for root&quot; | awk &#x27;&#123;print $11&#125;&#x27; | sort | uniq -c | sort -nr</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322170358123.png" alt="image-20240322170358123"></p>
+<p>发现IP<code>192.168.20.1</code>这个IP 通过密码认证进行了三次登陆</p>
+<h2 id="2、web日志审计"><a href="#2、web日志审计" class="headerlink" title="2、web日志审计"></a>2、web日志审计</h2><p>在之前的排查中知道该机器配置有宝塔，即存在web服务，查看web 日志，路径：<code>/www/wwwlogs/access.log</code></p>
+<p>依然利用<code>more</code>命令进行查看</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322171405425.png" alt="image-20240322171405425"></p>
+<p>但是这样太多太杂不好分析，我们在靶机上利用python2 快速开启一个http服务，将日志文件下载到本地进行分析</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">python --version</span><br><span class="line">ip a</span><br><span class="line">python -m SimpleHTTPServer</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322172153579.png" alt="image-20240322172153579"></p>
+<p>我们重点分析<code>access.log</code>文件：</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322172833614.png" alt="image-20240322172833614"></p>
+<p>之后用在线日志分析网站进行逐一分析</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322172941689.png" alt="image-20240322172941689"></p>
+<p>开头是127.0.0.1的IP访问，时间在3月7日，到49条日志开始，出现了<code>192.168.20.1</code>这个局域网IP 的操作，开始时间在<code>12:05:16</code></p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322174608055.png" alt="image-20240322174608055"></p>
+<p>也是对<code>/phpmyadmin</code>进行访问，持续到162条日志，但是时间全部在3月7日进行的，最后时间停留在<code>12:30:04</code></p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322173043519.png" alt="image-20240322173043519"></p>
+<p>从163条日志开始，时间来到3月20日，IP是本地的127.0.0.1，在<code>phpmyadmin</code>中对数据库进行了很多的操作，一直持续到日志结尾</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322174505560.png" alt="image-20240322174505560"></p>
+<p>这个日志很奇怪，在异常文件排查过程中，ssh公钥文件是在3月20日<code>10:30:24</code>被修改的，而在日志中<code>192.168.20.1</code>只在3月7日出现过</p>
+<p>使用360星图也未发现有攻击行为，只做了一些简单的流量分析</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322175203210.png" alt="image-20240322175203210"></p>
+<h1 id="八、异常文件排查"><a href="#八、异常文件排查" class="headerlink" title="八、异常文件排查"></a>八、异常文件排查</h1><h2 id="1、tmp临时文件排查"><a href="#1、tmp临时文件排查" class="headerlink" title="1、tmp临时文件排查"></a>1、tmp临时文件排查</h2><p>正常文件，有好多session文件</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322163935584.png" alt="image-20240322163935584"></p>
+<h2 id="2、ssh目录排查"><a href="#2、ssh目录排查" class="headerlink" title="2、ssh目录排查"></a>2、ssh目录排查</h2><p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322164150956.png" alt="image-20240322164150956"></p>
+<p>root的<code>.ssh</code>文件夹下存在公钥，其内容在3月20日<code>10:30:24</code>被修改，其权限在3月22日<code>21:09:44</code>被修改</p>
+<h2 id="3、root家目录排查"><a href="#3、root家目录排查" class="headerlink" title="3、root家目录排查"></a>3、root家目录排查</h2><p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322191230933.png" alt="image-20240322191230933"></p>
+<p>发现之前历史命令中排查到的wp 可执行文件，以及存在一个<code>.pcapng</code>文件，有关这个<code>.pcapng</code>文件，属于是流量包文件，通过这个文件，我们可以追踪跟该机器交互的流量数据，从而更好的进行排查</p>
+<h2 id="4、-api-文件夹排查"><a href="#4、-api-文件夹排查" class="headerlink" title="4、.api 文件夹排查"></a>4、.api 文件夹排查</h2><p>之前在历史命令中看到有对<code>.api</code>文件夹做过手脚，我们看一下</p>
+<p><code>api</code>文件夹和<code>.api</code>文件的内容相同，大小也相同，用<code>diff</code>命令进行比对</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff file1.txt file2.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240323154529579.png" alt="image-20240323154529579"></p>
+<p>运气不错，第一个文件就比对出来了差异，找到了隐藏的<code>$flag2 = &quot;flag&#123;bL5Frin6JVwVw7tJBdqXlHCMVpAenXI9In9&#125;&quot;;</code></p>
+<p>而其他文件都是一模一样，并无其他隐藏内容</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240323154950942.png" alt="image-20240323154950942"></p>
+<h2 id="5、wp-文件"><a href="#5、wp-文件" class="headerlink" title="5、wp 文件"></a>5、wp 文件</h2><p>在历史命令中，该wp 文件是由<code>go_build_untitled.exe</code>的一个文件改名而来，go_build 像是由go 语言编译而来</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322192037606.png" alt="image-20240322192037606"></p>
+<p>该文件是3月20日<code>15:34:04</code>的时间被修改，这个时间可能是黑客进行重命名的时间点，那这个文件是干嘛的，尝试执行下<img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322192532734.png" alt="image-20240322192532734"></p>
+<p>我擦，原来是题解，搞错了搞错了</p>
+<h2 id="5、-pcapng文件流量分析"><a href="#5、-pcapng文件流量分析" class="headerlink" title="5、.pcapng文件流量分析"></a>5、.pcapng文件流量分析</h2><p>那我们把目光放在这个啥.pcapng 流量包文件上，将该文件利用python2开启一个http服务，传到本地，需要关闭防火墙</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">python --version</span><br><span class="line">ip a</span><br><span class="line">python -m SimpleHTTPServer</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322193011749.png" alt="image-20240322193011749"></p>
+<p>原来名字是<code>数据包1.pcapng</code>，那么是否存在其他 .pcapng 文件呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name *.pcapng 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322193131851.png" alt="image-20240322193131851"></p>
+<p>不存在其他的流量包文件了，我们用<code>Wireshark</code>工具打开该数据包，成功打开（有关WireShark 的简单使用：<a href="/2024/03/01/Blue-Team-Packet-Sniffing-WireShark/" title="【流量分析】流量抓包工具WireShark的基本使用">【流量分析】流量抓包工具WireShark的基本使用</a>）</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322193324754.png" alt="image-20240322193324754"></p>
+<p>在之前的排查过程中，知道<code>192.168.20.1</code>这个IP出现过，现在看来确定是恶意IP</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322194206533.png" alt="image-20240322194206533"></p>
+<p>可以在视图中将时间调整为年月日时间的形式，并进行<code>http</code>和源IP<code>ip.src == 192.168.20.1</code>的过滤，发现黑客GET访问过<code>flag1</code>，追踪HTTP流，发现<code>flag1&#123;Network@_2020_Hack&#125;</code></p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322194559969.png" alt="image-20240322194559969"></p>
+<p>再一步步进行排查，黑客对<code>index.php</code>文件进行了多次访问，不点不知道，一点吓一跳</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322195313788.png" alt="image-20240322195313788"></p>
+<p>这不是妥妥的<code>webshell管理工具蚁剑</code>的流量特征，webshell木马的密码是<code>Network2020</code>，通过HTTP追踪，一步步查看黑客通过蚁剑都做过哪些事</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322200419738.png" alt="image-20240322200419738"></p>
+<p>可以看到，在3月20日<code>14:33:35</code>的时候，<code>pe9.sql</code>文件依然是存在的，那么我们在历史命令中排查的时候，发现有人通过命令将该文件删除了</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322201407323.png" alt="image-20240322201407323"></p>
+<p>在<code>14:37:24</code>的时候发现新增了<code>shell.php</code>文件</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322201526755.png" alt="image-20240322201526755"></p>
+<p>在<code>14:37:43</code>的时候发现新增<code>version2.php</code>文件</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322201714475.png" alt="image-20240322201714475"></p>
+<p>这里，是一个PHP冰蝎马的内容，显示默认密码<code>rebeyond</code></p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322202040481.png" alt="image-20240322202040481"></p>
+<p>在后续中全部是对<code>version2.php</code>文件的访问，那么这里，推测<code>version2.php</code>是冰蝎马</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240322202232074.png" alt="image-20240322202232074"></p>
+<p>确实是冰蝎马的流量特征，<code>version2.php</code>确认是后面黑客上传的木马文件，不管是请求包还是相应包都是加密传输</p>
+<p>黑客对该文件的访问持续到<code>14:40:32</code>，感觉这里很迷，因为结合在账户安全中查看的<code>last</code>命令 ，恶意IP在<code>14:30</code>和<code>15:04</code>的时候分别进行过登陆。至于冰蝎流量解密，本人水平有限，尝试解密失败，后面便不在追究，如果哪位师傅解密成功，还望告知，本人感激不尽！</p>
+<p>后面没有了一点线索，还是把目光放在了流量包上，看到除了http流量，还存在许多ssh 流量，丢，这思路不就打开了！我说这个靶场怎么奇奇怪怪的，原来这个靶场考察并不是追踪溯源入侵的整个流程，重点在流量这块。</p>
+<p>我们知道，在wireshark 中解密ssh 流量需要用到ssh 的私钥，而黑客应该是通过公钥进行的登陆，那么私钥怎么弄？</p>
+<p>我们把<code>id_ed25519.pub</code>移走、留下公钥，用私钥尝试ssh 登陆，成功，说明该私钥可以登陆成功</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240323122229620.png" alt="image-20240323122229620"></p>
+<p>我们把这个私钥下载下来添加到<code>wireshark</code>中：在【编辑】—【首选项】—【Protocols】—【ssh】</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240323122936704.png" alt="image-20240323122936704"></p>
+<p>我了个大豆，这样不行，ssh流量依然是加密状态，咳咳，这里就研究到这里，有师傅能解密的还望告知，本人感激不尽！</p>
+<h1 id="九、命令替换排查"><a href="#九、命令替换排查" class="headerlink" title="九、命令替换排查"></a>九、命令替换排查</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">echo $PATH</span><br><span class="line">rpm -Vf /usr/sbin/* &gt; 1.txt      #由于环境限制，我们先把执行结果保存下来再进行查看</span><br><span class="line">cat 1.txt | more</span><br><span class="line"></span><br><span class="line">#S 关键字代表文件大小发生了变化</span><br><span class="line">#5 关键字代表文件的 md5 值发生了变化</span><br><span class="line">#T 代表文件时间发生了变化</span><br></pre></td></tr></table></figure>
+
+<p>这里的话，有几个是是存在改变的文件，但是并非后门这种</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240323161737232.png" alt="image-20240323161737232"></p>
+<h1 id="十、被修改的密码"><a href="#十、被修改的密码" class="headerlink" title="十、被修改的密码"></a>十、被修改的密码</h1><p>重新看了一下<code>/etc/shadow</code>，发现除了www用户还存在mysql 用户，再联想到之前web日志中的phpmyadmin的访问，猜测密码会不会藏在数据库中</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240323163717316.png" alt="image-20240323163717316"></p>
+<p>在数据库的配置文件<code>lib/config.inc.php</code>文件中找到数据库的账号密码</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240323164407899.png" alt="image-20240323164407899"></p>
+<p>这里的话，我们到本地的机器上进行远程连接</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240323164658694.png" alt="image-20240323164658694"></p>
+<p>连接成功，只存在两个数据库，一路向下就好了，先查看一下<code>x2_user_group</code>的用户组表，管理员的用户组ID是1</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240323165225766.png" alt="image-20240323165225766"></p>
+<p>再查看<code>x2_user</code>表的内容，但是太多了，我们先查看都有哪些字段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select group_concat(column_name) from information_schema.columns where table_name=&#x27;x2_user&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240323164949448.png" alt="image-20240323164949448"></p>
+<p>有好多好多，看不过来，换了一个MySQL图形管理来查看</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240323165927883.png" alt="image-20240323165927883"></p>
+<p>可以看到这个<code>peadmin</code>用户的<code>usergroupid</code>值为1，那么该用户大概率是管理员，对他的密码进行解密</p>
+<img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240323170427835.png" alt="image-20240323170427835" style="zoom:150%;" />
+
+<p>成功获得明文密码：<code>Network@2020</code></p>
+<h1 id="十一、通关密码"><a href="#十一、通关密码" class="headerlink" title="十一、通关密码"></a>十一、通关密码</h1><p><img src="/img/friend_404.gif" data-original="/img/Emergency-Linux-web2/image-20240323170858240.png" alt="image-20240323170858240"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">1,提交攻击者IP</span><br><span class="line">192.168.20.1</span><br><span class="line"></span><br><span class="line">2,提交攻击者修改的管理员密码(明文)</span><br><span class="line">Network@2020</span><br><span class="line"></span><br><span class="line">3,提交第一次Webshell的连接URL(http://xxx.xxx.xxx.xx/abcdefg?abcdefg只需要提交abcdefg?abcdefg)</span><br><span class="line">index.php?user-app-register</span><br><span class="line"></span><br><span class="line">3,提交Webshell连接密码</span><br><span class="line">Network2020</span><br><span class="line"></span><br><span class="line">4,提交数据包的flag1</span><br><span class="line">flag1&#123;Network@_2020_Hack&#125;</span><br><span class="line"></span><br><span class="line">5,提交攻击者使用的后续上传的木马文件名称</span><br><span class="line">version2.php</span><br><span class="line"></span><br><span class="line">6,提交攻击者隐藏的flag2</span><br><span class="line">$flag2 = &quot;flag&#123;bL5Frin6JVwVw7tJBdqXlHCMVpAenXI9In9&#125;&quot;;</span><br><span class="line"></span><br><span class="line">7,提交攻击者隐藏的flag3</span><br><span class="line">flag3=&quot;flag&#123;5LourqoFt5d2zyOVUoVPJbOmeVmoKgcy6OZ&#125;&quot;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Lusen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/03/23/Emergency-Linux-web2/">http://example.com/2024/03/23/Emergency-Linux-web2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Lusen的小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5/">入侵排查</a></div><div class="post_share"><div class="social-share" data-image="/img/%E5%BA%94%E6%80%A5.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/25/Vulnhub-Lampiao-1/" title="【Vulnhub系列】Vulnhub靶场_Lampiao-1"><img class="cover" src="/img/friend_404.gif" data-original="/img/vulnhub.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【Vulnhub系列】Vulnhub靶场_Lampiao-1</div></div></a></div><div class="next-post pull-right"><a href="/2024/03/21/Emergency-Linux-web1/" title="【应急靶场】知攻善防Linux Web1靶场入侵排查"><img class="cover" src="/img/friend_404.gif" data-original="/img/%E5%BA%94%E6%80%A5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【应急靶场】知攻善防Linux Web1靶场入侵排查</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/02/15/Emergency-Centos8/" title="【应急靶场】Centos8入侵排查、响应加固"><img class="cover" src="/img/friend_404.gif" data-original="/img/%E5%BA%94%E6%80%A5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-15</div><div class="title">【应急靶场】Centos8入侵排查、响应加固</div></div></a></div><div><a href="/2024/03/21/Emergency-Linux-web1/" title="【应急靶场】知攻善防Linux Web1靶场入侵排查"><img class="cover" src="/img/friend_404.gif" data-original="/img/%E5%BA%94%E6%80%A5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-21</div><div class="title">【应急靶场】知攻善防Linux Web1靶场入侵排查</div></div></a></div><div><a href="/2024/05/26/Emergency-Nearsource-os-1/" title="【应急靶场】WinServer 2008近源应急OS-1"><img class="cover" src="/img/friend_404.gif" data-original="/img/%E5%BA%94%E6%80%A5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-26</div><div class="title">【应急靶场】WinServer 2008近源应急OS-1</div></div></a></div><div><a href="/2024/02/28/Emergency-WinServer-web1/" title="【应急靶场】Win Server Web1入侵排查"><img class="cover" src="/img/friend_404.gif" data-original="/img/%E5%BA%94%E6%80%A5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-28</div><div class="title">【应急靶场】Win Server Web1入侵排查</div></div></a></div><div><a href="/2024/03/04/Emergency-WinServer-web2/" title="【应急靶场】Win Server Web2入侵排查"><img class="cover" src="/img/friend_404.gif" data-original="/img/%E5%BA%94%E6%80%A5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-04</div><div class="title">【应急靶场】Win Server Web2入侵排查</div></div></a></div><div><a href="/2024/03/13/Emergency-WinServer-web3/" title="【应急靶场】Win Server Web3入侵排查"><img class="cover" src="/img/friend_404.gif" data-original="/img/%E5%BA%94%E6%80%A5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-13</div><div class="title">【应急靶场】Win Server Web3入侵排查</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/friend_404.gif" data-original="/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Lusen</div><div class="author-info__description">学无止境</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Lusensec" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://wpa.qq.com/msgrd?v=3&amp;uin=811209815&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:811209815@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章和相关工具仅供学习参考，禁止用于其他！！！未经授权禁止利用文章中的技术或工具对任何计算机或其他终端系统进行入侵操作，否则造成的直接或间接的后果和损失，均由使用者本人承担，本人不为此承担任何责任。如需转载或传播文章，需保证文章的完整性！文章如有侵权行为，请联系告知，我们会立即删除或修改并致歉！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%A5%E6%94%BB%E5%96%84%E9%98%B2Linux-Web2%E9%9D%B6%E5%9C%BA%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5"><span class="toc-text">知攻善防Linux Web2靶场入侵排查</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">一、环境配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%B4%A6%E6%88%B7%E5%AE%89%E5%85%A8"><span class="toc-text">二、账户安全</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4%E6%8E%92%E6%9F%A5"><span class="toc-text">三、历史命令排查</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%AB%AF%E5%8F%A3%E3%80%81%E8%BF%9B%E7%A8%8B%E6%8E%92%E6%9F%A5"><span class="toc-text">四、端口、进程排查</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E9%A1%B9%E6%8E%92%E6%9F%A5"><span class="toc-text">五、开机启动项排查</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E6%8E%92%E6%9F%A5"><span class="toc-text">六、定时任务排查</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%97%A5%E5%BF%97%E6%8E%92%E6%9F%A5"><span class="toc-text">七、日志排查</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1"><span class="toc-text">1、系统安全日志审计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81web%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1"><span class="toc-text">2、web日志审计</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%BC%82%E5%B8%B8%E6%96%87%E4%BB%B6%E6%8E%92%E6%9F%A5"><span class="toc-text">八、异常文件排查</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81tmp%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6%E6%8E%92%E6%9F%A5"><span class="toc-text">1、tmp临时文件排查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81ssh%E7%9B%AE%E5%BD%95%E6%8E%92%E6%9F%A5"><span class="toc-text">2、ssh目录排查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81root%E5%AE%B6%E7%9B%AE%E5%BD%95%E6%8E%92%E6%9F%A5"><span class="toc-text">3、root家目录排查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81-api-%E6%96%87%E4%BB%B6%E5%A4%B9%E6%8E%92%E6%9F%A5"><span class="toc-text">4、.api 文件夹排查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81wp-%E6%96%87%E4%BB%B6"><span class="toc-text">5、wp 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81-pcapng%E6%96%87%E4%BB%B6%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90"><span class="toc-text">5、.pcapng文件流量分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E5%91%BD%E4%BB%A4%E6%9B%BF%E6%8D%A2%E6%8E%92%E6%9F%A5"><span class="toc-text">九、命令替换排查</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E8%A2%AB%E4%BF%AE%E6%94%B9%E7%9A%84%E5%AF%86%E7%A0%81"><span class="toc-text">十、被修改的密码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E9%80%9A%E5%85%B3%E5%AF%86%E7%A0%81"><span class="toc-text">十一、通关密码</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/Red-Team-Invasion-RLO-file-fishing/" title="【红队入侵】文件钓鱼—RLO构造后缀"><img src="/img/friend_404.gif" data-original="/img/%E7%BD%91%E7%BB%9C%E9%92%93%E9%B1%BC.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【红队入侵】文件钓鱼—RLO构造后缀"/></a><div class="content"><a class="title" href="/2024/06/07/Red-Team-Invasion-RLO-file-fishing/" title="【红队入侵】文件钓鱼—RLO构造后缀">【红队入侵】文件钓鱼—RLO构造后缀</a><time datetime="2024-06-07T04:40:25.000Z" title="发表于 2024-06-07 12:40:25">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/05/30/Python-tools-netcat/" title="【Python武器库】取代netcat（过杀软）"><img src="/img/friend_404.gif" data-original="/img/Python%E6%AD%A6%E5%99%A8%E5%BA%93.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Python武器库】取代netcat（过杀软）"/></a><div class="content"><a class="title" href="/2024/05/30/Python-tools-netcat/" title="【Python武器库】取代netcat（过杀软）">【Python武器库】取代netcat（过杀软）</a><time datetime="2024-05-30T11:06:13.000Z" title="发表于 2024-05-30 19:06:13">2024-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/05/29/OSCP-Katana/" title="【OSCP系列】OSCP靶机-Katana"><img src="/img/friend_404.gif" data-original="/img/oscp.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【OSCP系列】OSCP靶机-Katana"/></a><div class="content"><a class="title" href="/2024/05/29/OSCP-Katana/" title="【OSCP系列】OSCP靶机-Katana">【OSCP系列】OSCP靶机-Katana</a><time datetime="2024-05-29T09:45:00.000Z" title="发表于 2024-05-29 17:45:00">2024-05-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/05/28/OSCP-InfosecPrep/" title="【OSCP系列】OSCP靶机-InfosecPrep"><img src="/img/friend_404.gif" data-original="/img/oscp.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【OSCP系列】OSCP靶机-InfosecPrep"/></a><div class="content"><a class="title" href="/2024/05/28/OSCP-InfosecPrep/" title="【OSCP系列】OSCP靶机-InfosecPrep">【OSCP系列】OSCP靶机-InfosecPrep</a><time datetime="2024-05-28T06:39:09.000Z" title="发表于 2024-05-28 14:39:09">2024-05-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/05/27/OSCP-cybersploit-2/" title="【OSCP系列】OSCP靶机—CyberSploit2"><img src="/img/friend_404.gif" data-original="/img/oscp.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【OSCP系列】OSCP靶机—CyberSploit2"/></a><div class="content"><a class="title" href="/2024/05/27/OSCP-cybersploit-2/" title="【OSCP系列】OSCP靶机—CyberSploit2">【OSCP系列】OSCP靶机—CyberSploit2</a><time datetime="2024-05-27T07:00:48.000Z" title="发表于 2024-05-27 15:00:48">2024-05-27</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/%E5%BA%94%E6%80%A5.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Lusen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="true" data-text="富强💖,民主💖,文明💖,和谐💖,平等💖,公正💖,法治💖,爱国💖,敬业💖,诚信💖,友善💖" data-fontsize="20px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,d=o();function o(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=o());for(var e,i=0;i<d.length;i++)0<=(e=(e=d[i]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,a,n,o=d[i];e=function(){d=d.filter(function(t){return o!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(o)},(t=o).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,n=t.getAttribute("data-original"),a.onload=function(){t.src=n,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=n},t.src!==n&&(a.src=n)))}()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)}(this);</script></body></html>
