@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【玄机应急】第六章 流量特征分析-蚂蚁爱上树</title>
+      <link href="/2024/06/13/xuanji-diliuzhang-Traffic-characteristics/"/>
+      <url>/2024/06/13/xuanji-diliuzhang-Traffic-characteristics/</url>
+      
+        <content type="html"><![CDATA[<h1 id="【玄机应急】第六章-流量特征分析-蚂蚁爱上树"><a href="#【玄机应急】第六章-流量特征分析-蚂蚁爱上树" class="headerlink" title="【玄机应急】第六章 流量特征分析-蚂蚁爱上树"></a>【玄机应急】第六章 流量特征分析-蚂蚁爱上树</h1><h2 id="一、附件下载"><a href="#一、附件下载" class="headerlink" title="一、附件下载"></a>一、附件下载</h2><p>下载附件，在Wireshark中打开</p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled.png" alt="Untitled"></p><h2 id="二、步骤一：管理员Admin账号的密码是什么？"><a href="#二、步骤一：管理员Admin账号的密码是什么？" class="headerlink" title="二、步骤一：管理员Admin账号的密码是什么？"></a>二、步骤一：管理员Admin账号的密码是什么？</h2><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled1.png" alt="Untitled"></p><h3 id="1、发现蚁剑流量特征"><a href="#1、发现蚁剑流量特征" class="headerlink" title="1、发现蚁剑流量特征"></a>1、发现蚁剑流量特征</h3><p>先大致浏览一下整体的数据包，这两个端口通讯频繁</p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled2.png" alt="Untitled"></p><p>找几个流量包来看一看，发现蚁剑流量特征</p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled3.png" alt="Untitled"></p><h3 id="2、找管理员的密码"><a href="#2、找管理员的密码" class="headerlink" title="2、找管理员的密码"></a>2、找管理员的密码</h3><p>找木马<code>product2.php</code> ，做标记</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http.request.uri contains <span class="string">&quot;/product2.php&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//ctrl a 全选，然后ctrl m 做标记</span></span><br></pre></td></tr></table></figure><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled4.png" alt="Untitled"></p><p>之后重新回归http，看木马的响应包</p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled5.png" alt="Untitled"></p><p>追踪http流，是数据库的配置文件，搜索一下</p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled6.png" alt="Untitled"></p><p>找个md5解密下</p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled7.png" alt="Untitled"></p><p>flag不对，并不是真的密码</p><h3 id="3、真实的Admin密码"><a href="#3、真实的Admin密码" class="headerlink" title="3、真实的Admin密码"></a>3、真实的Admin密码</h3><p>继续查看蚁剑的响应包。在3414这个包中可以看到此时并没有Admin用户。因此推测Admin是黑客权限维持的一个用户</p><p>![Untitled](&#x2F;img&#x2F;xuanji-diliuzhang-Traffic-characteristics&#x2F;Untitled 8.png)</p><p>那这有点麻烦了，如果Admin是黑客新增用户做的权限维持的话，是没有返回结果的，我们需要破解蚁剑的流量。蚁剑的流量特征还是很好鉴别的，如果不懂，还请移步到<strong>【蓝队应急】WebShell 流量特征</strong> 文章查看。</p><p>我们找没有回显或回显较少的包，对请求的蚁剑流量做解析。为了让大家动手破解，这里也不写脚本工具，仅用一些在线网站即可。</p><p>好在这个加密并不是很难，仅仅URL和base64。我们需要对蚁剑的流量掐头去尾：</p><ol><li>先URL解码一下</li><li>再以&amp;为分隔符，去掉所有的&amp;，仅仅留下来中间最大的base64编码</li><li>再进行base64解码下</li></ol><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled9.png" alt="Untitled"></p><p>再base64解码即可，这里的示例是3531号数据包，大家可以一同尝试解密下</p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled10.png" alt="Untitled"></p><p>当然，更简单的方法是直接筛选蚁剑的流量包，在下面一栏看请求的数据</p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled11.png" alt="Untitled"></p><p>一步步解密，最后在15190号包中找到，记得解密时把<code>il</code> 去掉</p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled12.png" alt="Untitled"></p><p>找到黑客权限维持时创建的Admin 的密码是<code>Password1</code></p><h2 id="三、步骤二：LSASS-exe的程序进程ID是多少？"><a href="#三、步骤二：LSASS-exe的程序进程ID是多少？" class="headerlink" title="三、步骤二：LSASS.exe的程序进程ID是多少？"></a>三、步骤二：LSASS.exe的程序进程ID是多少？</h2><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled13.png" alt="Untitled"></p><p>同样的，这个也需要一步步解密蚁剑的流量，在<code>5922</code>号数据包</p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled14.png" alt="Untitled"></p><h2 id="四、步骤三：用户WIN101的密码是什么"><a href="#四、步骤三：用户WIN101的密码是什么" class="headerlink" title="四、步骤三：用户WIN101的密码是什么?"></a>四、步骤三：用户WIN101的密码是什么?</h2><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled15.png" alt="Untitled"></p><h3 id="1、导出密码文件"><a href="#1、导出密码文件" class="headerlink" title="1、导出密码文件"></a>1、导出密码文件</h3><p>在步骤二中，黑客dump下来lsass进程到<code>C:\temp\OnlineShopBackup.zip</code> ，那我们需要拿到这个文件</p><p>在<code>6944</code>号数据包中，解密后是查看<code>C:\temp\OnlineShopBackup.zip</code> 的内容，那么它的相应包就是咱们需要的文件了。直接在【文件】中【到处对象】选择http，找到这个号数据包下方的47MB的数据保存</p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled16.png" alt="Untitled"></p><p>导出了一个product2.php 文件，但这个数据包中还有蚁剑的数据</p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled17.png" alt="Untitled"></p><p>删除开头的<code>e1c1709</code> ，修改后缀成dmp</p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled18.png" alt="Untitled"></p><h3 id="2、加载密码文件"><a href="#2、加载密码文件" class="headerlink" title="2、加载密码文件"></a>2、加载密码文件</h3><p>交给mimikatz 去加载</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sekurlsa::<span class="variable constant_">minidump</span> <span class="number">1</span>.dmp</span><br><span class="line">sekurlsa::<span class="variable constant_">logonpasswords</span></span><br></pre></td></tr></table></figure><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled19.png" alt="Untitled"></p><p><img src="/img/xuanji-diliuzhang-Traffic-characteristics/Untitled20.png" alt="Untitled"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 玄机应急靶场 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 流量特征 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【玄机应急】第六章特征分析—waf上截获的黑客攻击流量</title>
       <link href="/2024/06/13/xuanji-diliuzhang-waf/"/>
       <url>/2024/06/13/xuanji-diliuzhang-waf/</url>
