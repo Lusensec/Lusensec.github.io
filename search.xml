@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【OSCP系列】OSCP靶机—PyExpvm</title>
+      <link href="/2024/06/28/OSCP-PyExp/"/>
+      <url>/2024/06/28/OSCP-PyExp/</url>
+      
+        <content type="html"><![CDATA[<h1 id="【OSCP系列】OSCP靶机—PyExpvm"><a href="#【OSCP系列】OSCP靶机—PyExpvm" class="headerlink" title="【OSCP系列】OSCP靶机—PyExpvm"></a>【OSCP系列】OSCP靶机—PyExpvm</h1><h2 id="一、主机发现"><a href="#一、主机发现" class="headerlink" title="一、主机发现"></a>一、主机发现</h2><p><img src="/img/OSCP-PyExp/image-20240627232247823.png" alt="image-20240627232247823"></p><h2 id="二、端口扫描"><a href="#二、端口扫描" class="headerlink" title="二、端口扫描"></a>二、端口扫描</h2><h3 id="1、快速扫描"><a href="#1、快速扫描" class="headerlink" title="1、快速扫描"></a>1、快速扫描</h3><p><img src="/img/OSCP-PyExp/image-20240627232324271.png" alt="image-20240627232324271"></p><h3 id="2、全端口扫描"><a href="#2、全端口扫描" class="headerlink" title="2、全端口扫描"></a>2、全端口扫描</h3><p><img src="/img/OSCP-PyExp/image-20240627232553908.png" alt="image-20240627232553908"></p><p><img src="/img/OSCP-PyExp/image-20240627235748090.png" alt="image-20240627235748090"></p><p>只开放了1337、3306端口</p><h3 id="3、针对开放端口做详细探测"><a href="#3、针对开放端口做详细探测" class="headerlink" title="3、针对开放端口做详细探测"></a>3、针对开放端口做详细探测</h3><p><img src="/img/OSCP-PyExp/image-20240628000021819.png" alt="image-20240628000021819"></p><p>1337是ssh服务，3306是mysql数据库服务；推测跑在Linxu服务器上</p><p>这里很奇怪，没有web服务开放，推测应该在mysql中拿信息</p><h3 id="4、针对开放端口做漏洞探测"><a href="#4、针对开放端口做漏洞探测" class="headerlink" title="4、针对开放端口做漏洞探测"></a>4、针对开放端口做漏洞探测</h3><p>虽然这样探测出来的可能性微乎其微，但必要的流程还是走一下</p><p><img src="/img/OSCP-PyExp/image-20240628000437268.png" alt="image-20240628000437268"></p><p>这里给了几个漏洞测试的脚本信息，但是他们的利用都失败了</p><h2 id="三、MySQL数据库信息收集"><a href="#三、MySQL数据库信息收集" class="headerlink" title="三、MySQL数据库信息收集"></a>三、MySQL数据库信息收集</h2><p>mysql无疑是本靶场最重要的一个突破点，先测试一下mysql是否允许外部连接</p><p><img src="/img/OSCP-PyExp/image-20240628000611734.png" alt="image-20240628000611734"></p><p>哦，这里是肯定的，那接下来我们可以尝试爆破</p><p><img src="/img/OSCP-PyExp/image-20240628001215373.png" alt="image-20240628001215373"></p><p><code>rockyou</code>这个字典属实爽快，很快就爆破出来了；接下来登陆数据库查看有无敏感信息</p><p><img src="/img/OSCP-PyExp/image-20240628001407393.png" alt="image-20240628001407393"></p><p>在<code>data</code>这个数据库中发现有个hash值</p><p><img src="/img/OSCP-PyExp/image-20240628001440897.png" alt="image-20240628001440897"></p><p>这样看着有点乱，我们分开字段值来查看</p><p><img src="/img/OSCP-PyExp/image-20240628001714076.png" alt="image-20240628001714076"></p><p>大佬勿喷，笔者还是首次碰到这个加密方法，因此查找了一些资料，下面简单对这个加密算法做出一个说明</p><blockquote><p>Fernet 算法是一个安全的加密方法，它使用 AES 作为底层加密算法，并结合 HMAC 来确保数据的完整性。</p><p>其是一种对称加密算法，由Python的cryptography库提供支持。使用Fernet加密算法可以实现简单而又强大的加密功能，通过生成加密密钥加密数据，并使用同一个密钥解密数据。</p></blockquote><p>下面对这个算法进行一个加解密的尝试，参考文章资料：<a href="https://deepinout.com/python/python-qa/84_hk_1709160332.html">Fernet加密算法在Python中的应用|极客笔记 (deepinout.com)</a></p><p>尝试对<code>Hello, world!</code>进行加解密</p><p><img src="/img/OSCP-PyExp/image-20240628003746582.png" alt="image-20240628003746582"></p><p>之后将数据库中拿到的信息进行解密，拿到了字符串：lucy:wJ9&#96;”Lemdv9[FEw-</p><p><img src="/img/OSCP-PyExp/image-20240628004435194.png" alt="image-20240628004435194"></p><p>这个字符串，明眼一看，中间由冒号<code>:</code>分割，怕是个账号密码</p><h2 id="四、SSH登陆Getshell"><a href="#四、SSH登陆Getshell" class="headerlink" title="四、SSH登陆Getshell"></a>四、SSH登陆Getshell</h2><p>也是非常的流畅，拿到了shell</p><p><img src="/img/OSCP-PyExp/image-20240628004715374.png" alt="image-20240628004715374"></p><h2 id="五、权限提升"><a href="#五、权限提升" class="headerlink" title="五、权限提升"></a>五、权限提升</h2><p>本有有用户密码的情况下，查看是否有sudo滥用的情况，果真有</p><p><img src="/img/OSCP-PyExp/image-20240628005404504.png" alt="image-20240628005404504"></p><p>这里的exec函数，将会执行任何的py代码；找一段py 的反弹shell</p><p><img src="/img/OSCP-PyExp/image-20240628010553340.png" alt="image-20240628010553340"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> OSCP系列靶场 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oscp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【流量加密】AntSword流量RSA加密</title>
       <link href="/2024/06/26/Red-Team-Invasion-AntSword-encryption/"/>
       <url>/2024/06/26/Red-Team-Invasion-AntSword-encryption/</url>
