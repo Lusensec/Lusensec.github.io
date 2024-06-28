@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【OSCP系列】OSCP靶机-driftingblues7_vh</title>
+      <link href="/2024/06/28/OSCP-driftingblues7-vh/"/>
+      <url>/2024/06/28/OSCP-driftingblues7-vh/</url>
+      
+        <content type="html"><![CDATA[<h1 id="【OSCP系列】OSCP靶机—driftingblues7-vh"><a href="#【OSCP系列】OSCP靶机—driftingblues7-vh" class="headerlink" title="【OSCP系列】OSCP靶机—driftingblues7_vh"></a>【OSCP系列】OSCP靶机—driftingblues7_vh</h1><h2 id="一、主机发现"><a href="#一、主机发现" class="headerlink" title="一、主机发现"></a>一、主机发现</h2><p><img src="/img/OSCP-driftingblues7-vh/image-20240628211809756.png" alt="image-20240628211809756"></p><h2 id="二、端口扫描"><a href="#二、端口扫描" class="headerlink" title="二、端口扫描"></a>二、端口扫描</h2><h3 id="1、快速扫描"><a href="#1、快速扫描" class="headerlink" title="1、快速扫描"></a>1、快速扫描</h3><p><img src="/img/OSCP-driftingblues7-vh/image-20240628211852272.png" alt="image-20240628211852272"></p><h3 id="2、全端口扫描"><a href="#2、全端口扫描" class="headerlink" title="2、全端口扫描"></a>2、全端口扫描</h3><p><img src="/img/OSCP-driftingblues7-vh/image-20240628212125320.png" alt="image-20240628212125320"></p><h3 id="3、版本系统探测"><a href="#3、版本系统探测" class="headerlink" title="3、版本系统探测"></a>3、版本系统探测</h3><p><img src="/img/OSCP-driftingblues7-vh/image-20240628212534300.png" alt="image-20240628212534300"></p><p>66端口是个python开放的http服务，80端口是http服务，但是重定向到了443的https服务，443是https服务，2403开放了一个端口，<code>taskmaster2000?</code>是一个未知的服务，3306是mysql服务，8086也是一个http服务</p><h3 id="4、端口漏洞探测"><a href="#4、端口漏洞探测" class="headerlink" title="4、端口漏洞探测"></a>4、端口漏洞探测</h3><p><img src="/img/OSCP-driftingblues7-vh/image-20240628212544334.png" alt="image-20240628212544334"></p><p>在443发现了一个可能的csrf漏洞</p><h2 id="三、HTTP信息收集"><a href="#三、HTTP信息收集" class="headerlink" title="三、HTTP信息收集"></a>三、HTTP信息收集</h2><h3 id="1、66端口信息收集"><a href="#1、66端口信息收集" class="headerlink" title="1、66端口信息收集"></a>1、66端口信息收集</h3><p>先对66端口的http服务下刀</p><p>看一下源代码</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628221237089.png" alt="image-20240628221237089"></p><p>由本地的js文件，看这个<code>index_files/</code>目录，存在目录穿越</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628221254258.png" alt="image-20240628221254258"></p><p>对66端口扫一下</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628221157433.png" alt="image-20240628221157433"></p><p>啊嘞，<code>.bash_history</code>文件，这是某个用户的家目录吗？</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628221528945.png" alt="image-20240628221528945"></p><p>我们对<code>/etc/hosts</code>文件很感兴趣，以及<code>flag.txt</code>文件，这里先记录下来这些文件</p><p>继续看<code>.bash_profile</code>文件，这里对这个文件做简单的介绍</p><blockquote><p>.bash_prfile 文件是用户登陆之后初始化的文件。即当用户登陆之后，会先执行这个文件的内容，很多时候这个文件会被黑客写入反弹命令，从而成为一种权限维持的手段</p></blockquote><p><img src="/img/OSCP-driftingblues7-vh/image-20240628222337276.png" alt="image-20240628222337276"></p><p>这里只是在原先的PATH路径上加上了家目录下的<code>/bin</code>目录，并重新加载PATH</p><p>看之后的<code>.cshrc</code>文件，<code>alias</code>做了一些别名设置</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628222636891.png" alt="image-20240628222636891"></p><p>之后看<code>flag.txt</code>文件，没啥用昂</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628222609072.png" alt="image-20240628222609072"></p><p>继续完后看，<code>.pki</code>目录啥也没有</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628222926970.png" alt="image-20240628222926970"></p><p><code>index_files</code>目录下我们在浏览器看过的，有很多js 文件</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628223001531.png" alt="image-20240628223001531"></p><h3 id="2、80、443端口信息收集"><a href="#2、80、443端口信息收集" class="headerlink" title="2、80、443端口信息收集"></a>2、80、443端口信息收集</h3><p>我们打开80端口就跳转到了443</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628223058805.png" alt="image-20240628223058805"></p><p>展开一个目录扫描，只要200，因为大都302跳转到登陆页面了</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628223835494.png" alt="image-20240628223835494"></p><p>看<code>README.md</code>文件内容</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628224039258.png" alt="image-20240628224039258"></p><p>这提示不就来了，查了一下<code>EyesOfNetwork</code>的信息</p><blockquote><p>“EyesOfNetwork” 是一个网络监控工具，它可以帮助用户监控网络流量和分析网络行为。这个工具通常用于网络安全领域，以检测潜在的威胁和异常行为。</p></blockquote><p>后面给了版本号<code>5.3</code>，第一时间当然是查一下有无漏洞</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628224441375.png" alt="image-20240628224441375"></p><p>对这几个都挺期待的，看最后一个远程代码执行漏洞</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628224553130.png" alt="image-20240628224553130"></p><p>py3的，直接执行一下试试</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628224644382.png" alt="image-20240628224644382"></p><p>看来是比较成功的，发现了Admin用户的key，并创建了用户名<code>h4ker</code></p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628224836055.png" alt="image-20240628224836055"></p><p>这里显示监听一个端口，有点懵昂。查了一下，这个脚本的利用在第三、四行，就是这里</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628225617382.png" alt="image-20240628225617382"></p><h2 id="四、获取root权限"><a href="#四、获取root权限" class="headerlink" title="四、获取root权限"></a>四、获取root权限</h2><p>因为上面显示监听在443端口了，所以端口那里使用443</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628225900433.png" alt="image-20240628225900433"></p><p>what？</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628230100328.png" alt="image-20240628230100328"></p><p>不在docker里面</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628230125878.png" alt="image-20240628230125878"></p><p>what？这就完事儿了？</p><p>对其他端口展开了一些调查，发现确实获取不了其他信息了</p><p><img src="/img/OSCP-driftingblues7-vh/image-20240628230540264.png" alt="image-20240628230540264"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> OSCP系列靶场 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oscp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【OSCP系列】OSCP靶机—PyExpvm</title>
       <link href="/2024/06/28/OSCP-PyExp/"/>
       <url>/2024/06/28/OSCP-PyExp/</url>
