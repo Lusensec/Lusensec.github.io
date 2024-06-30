@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【OSCP系列】OSCP靶机—Ha-natraj</title>
+      <link href="/2024/06/30/OSCP-Ha-natraj/"/>
+      <url>/2024/06/30/OSCP-Ha-natraj/</url>
+      
+        <content type="html"><![CDATA[<h1 id="【OSCP系列】OSCP靶机—Ha-natraj"><a href="#【OSCP系列】OSCP靶机—Ha-natraj" class="headerlink" title="【OSCP系列】OSCP靶机—Ha-natraj"></a>【OSCP系列】OSCP靶机—Ha-natraj</h1><h2 id="一、主机发现"><a href="#一、主机发现" class="headerlink" title="一、主机发现"></a>一、主机发现</h2><p><img src="/img/OSCP-Ha-natraj/image-20240630145606754.png" alt="image-20240630145606754"></p><h2 id="二、端口扫描"><a href="#二、端口扫描" class="headerlink" title="二、端口扫描"></a>二、端口扫描</h2><h3 id="1、快速扫描"><a href="#1、快速扫描" class="headerlink" title="1、快速扫描"></a>1、快速扫描</h3><p><img src="/img/OSCP-Ha-natraj/image-20240630145644330.png" alt="image-20240630145644330"></p><h3 id="2、全端口扫描"><a href="#2、全端口扫描" class="headerlink" title="2、全端口扫描"></a>2、全端口扫描</h3><p><img src="/img/OSCP-Ha-natraj/image-20240630145713927.png" alt="image-20240630145713927"></p><p><img src="/img/OSCP-Ha-natraj/image-20240630145929111.png" alt="image-20240630145929111"></p><h3 id="3、服务版本探测"><a href="#3、服务版本探测" class="headerlink" title="3、服务版本探测"></a>3、服务版本探测</h3><p><img src="/img/OSCP-Ha-natraj/image-20240630145940567.png" alt="image-20240630145940567"></p><p>正常的ssh服务和http服务，是Ubuntu系统</p><h3 id="4、漏洞探测"><a href="#4、漏洞探测" class="headerlink" title="4、漏洞探测"></a>4、漏洞探测</h3><p><img src="/img/OSCP-Ha-natraj/image-20240630150326003.png" alt="image-20240630150326003"></p><p>发现了<code>console</code>和<code>images</code>目录</p><h2 id="三、HTTP信息收集"><a href="#三、HTTP信息收集" class="headerlink" title="三、HTTP信息收集"></a>三、HTTP信息收集</h2><p>先对首页展开调查</p><p><img src="/img/OSCP-Ha-natraj/image-20240630150231216.png" alt="image-20240630150231216"></p><p>大致都是对这位<code>Nataraj</code>的印度神进行了讲述，并无有价值的东西</p><p>看下nmap扫描出来的<code>console</code>目录，这个目录的名字我们还是很感兴趣的</p><p><img src="/img/OSCP-Ha-natraj/image-20240630150457085.png" alt="image-20240630150457085"></p><p>噢，有个<code>file.php</code>，是个很好的点</p><p><img src="/img/OSCP-Ha-natraj/image-20240630150525571.png" alt="image-20240630150525571"></p><p>一片空白？我们FUZZ试试</p><p><img src="/img/OSCP-Ha-natraj/image-20240630153904848.png" alt="image-20240630153904848"></p><p>有<code>file</code>参数，成功挖掘到一个漏洞</p><p><img src="/img/OSCP-Ha-natraj/image-20240630153948936.png" alt="image-20240630153948936"></p><h2 id="四、Getshell"><a href="#四、Getshell" class="headerlink" title="四、Getshell"></a>四、Getshell</h2><p>在上面的<code>/etc/passwd</code>文件中发现两个用户名</p><p><img src="/img/OSCP-Ha-natraj/image-20240630154056230.png" alt="image-20240630154056230"></p><p>PHP伪协议读取这个<code>file.php</code>文件内容</p><p><img src="/img/OSCP-Ha-natraj/image-20240630154321835.png" alt="image-20240630154321835"></p><p>目前只有一个任意文件包含漏洞；能想到的有日志文件包含</p><p>本想包含一下apache 的日志，但是是个空白</p><p><img src="/img/OSCP-Ha-natraj/image-20240630155240403.png" alt="image-20240630155240403"></p><p>转去包含其他日志去；Ubuntu 的登陆日志在<code>/var/log/auth.log</code></p><p><img src="/img/OSCP-Ha-natraj/image-20240630155356137.png" alt="image-20240630155356137"></p><p>OK，有登录日志；那利用ssh登陆，写入webshell；这里用了很多方法，均未成功，最终使用如下方法</p><p><img src="/img/OSCP-Ha-natraj/image-20240630163039088.png" alt="image-20240630163039088"></p><p>连接成功（如果失败，可以重置靶场环境多尝试）</p><p><img src="/img/OSCP-Ha-natraj/image-20240630164930178.png" alt="image-20240630164930178"></p><p>将shell反弹到nc上</p><p><img src="/img/OSCP-Ha-natraj/image-20240630165307264.png" alt="image-20240630165307264"></p><h2 id="五、权限提升"><a href="#五、权限提升" class="headerlink" title="五、权限提升"></a>五、权限提升</h2><h3 id="1、提权至mahakal"><a href="#1、提权至mahakal" class="headerlink" title="1、提权至mahakal"></a>1、提权至mahakal</h3><p>看到apache可以sudo 开启暂停，之后查找apache相关可操作的关键性文件</p><p><img src="/img/OSCP-Ha-natraj/image-20240630175107120.png" alt="image-20240630175107120"></p><p>通过修改apache的运行用户，达到提权，但是这里需要简单说明一下</p><blockquote><p>这里不能修改成root，apache默认不允许root启动，如果要root启动，需要添加“-DBIG_SECURITY_HOLE”到CFLAGS环境变量中重新编译</p></blockquote><p>因此，只能选择root之外的普通用户；记得把前面的注释掉</p><p><img src="/img/OSCP-Ha-natraj/image-20240630180950251.png" alt="image-20240630180950251"></p><p>保存配置文件，重启服务器，然后重新连接shell，拿到<code>mahakal</code>用户的权限（注意多等待会，apache重启需要时间）</p><p><img src="/img/OSCP-Ha-natraj/image-20240630181618663.png" alt="image-20240630181618663"></p><h3 id="2、提权至root"><a href="#2、提权至root" class="headerlink" title="2、提权至root"></a>2、提权至root</h3><p>之后反弹shell，查看sudo</p><p><img src="/img/OSCP-Ha-natraj/image-20240630181739763.png" alt="image-20240630181739763"></p><p>nmap的sudo提权方法</p><p><img src="/img/OSCP-Ha-natraj/image-20240630181828812.png" alt="image-20240630181828812">查看nmap 的版本</p><p><img src="/img/OSCP-Ha-natraj/image-20240630181939177.png" alt="image-20240630181939177"></p><p>高于5.21，只能用第一种方法</p><p><img src="/img/OSCP-Ha-natraj/image-20240630182126028.png" alt="image-20240630182126028"></p><p>提取成功</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> OSCP系列靶场 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oscp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【OSCP系列】OSCP靶机-driftingblues7_vh</title>
       <link href="/2024/06/28/OSCP-driftingblues7-vh/"/>
       <url>/2024/06/28/OSCP-driftingblues7-vh/</url>
