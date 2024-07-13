@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【OSCP系列】OSCP靶机—Sumo</title>
+      <link href="/2024/07/13/OSCP-Sumo/"/>
+      <url>/2024/07/13/OSCP-Sumo/</url>
+      
+        <content type="html"><![CDATA[<h1 id="【OSCP系列】OSCP靶机—Sumo"><a href="#【OSCP系列】OSCP靶机—Sumo" class="headerlink" title="【OSCP系列】OSCP靶机—Sumo"></a>【OSCP系列】OSCP靶机—Sumo</h1><h2 id="一、主机发现"><a href="#一、主机发现" class="headerlink" title="一、主机发现"></a>一、主机发现</h2><p><img src="/img/OSCP-Sumo/image-20240713200918079.png" alt="image-20240713200918079"></p><h2 id="二、端口扫描"><a href="#二、端口扫描" class="headerlink" title="二、端口扫描"></a>二、端口扫描</h2><p>1、快速扫描</p><p><img src="/img/OSCP-Sumo/image-20240713201007493.png" alt="image-20240713201007493"></p><p>2、全端口扫描</p><p><img src="/img/OSCP-Sumo/image-20240713201102130.png" alt="image-20240713201102130"></p><p>3、开放端口的服务信息</p><p><img src="/img/OSCP-Sumo/image-20240713201256990.png" alt="image-20240713201256990"></p><p>4、开放端口的漏洞信息</p><p><img src="/img/OSCP-Sumo/image-20240713201755990.png" alt="image-20240713201755990"></p><p>80端口受dos攻击影响</p><h2 id="三、HTTP信息收集"><a href="#三、HTTP信息收集" class="headerlink" title="三、HTTP信息收集"></a>三、HTTP信息收集</h2><p>1、源代码查看</p><p><img src="/img/OSCP-Sumo/image-20240713201721364.png" alt="image-20240713201721364"></p><p><img src="/img/OSCP-Sumo/image-20240713201740102.png" alt="image-20240713201740102"></p><p>没啥信息</p><p>2、目录扫描</p><p><img src="/img/OSCP-Sumo/image-20240713201656130.png" alt="image-20240713201656130"></p><p>没结果，准备个大字典</p><p><img src="/img/OSCP-Sumo/image-20240713202824335.png" alt="image-20240713202824335"></p><p><img src="/img/OSCP-Sumo/image-20240713203549284.png" alt="image-20240713203549284"></p><p>大字典跑完了依然没结果</p><p>3、使用漏洞探测器</p><p>使用轻巧型扫描器 nikto 进行扫描，发现shellshock 漏洞</p><p><img src="/img/OSCP-Sumo/image-20240713203714112.png" alt="image-20240713203714112"></p><p>看下解释</p><p><img src="/img/OSCP-Sumo/image-20240713203841473.png" alt="image-20240713203841473"></p><h2 id="四、Getshell"><a href="#四、Getshell" class="headerlink" title="四、Getshell"></a>四、Getshell</h2><p>查找有关该漏洞的利用</p><p><img src="/img/OSCP-Sumo/image-20240713203945197.png" alt="image-20240713203945197"></p><p>有很多msf 内置的利用方式，去msf查找</p><p><img src="/img/OSCP-Sumo/image-20240713204214469.png" alt="image-20240713204214469"></p><p>确实有很多；在端口扫描中，发现80端口是apache服务，因此选择编号为1 的，更贴切apache</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set rhosts 192.168.31.68</span><br><span class="line">set TARGETURI /cgi-bin/test.sh</span><br></pre></td></tr></table></figure><blockquote><p>这里rhosts 是靶机ip，TARGETURI 是nikto 识别出来的路径</p><p>lhost、lport 可以不用动，默认是本机IP跟端口，如果不是需要修改</p></blockquote><p><img src="/img/OSCP-Sumo/image-20240713205310315.png" alt="image-20240713205310315"></p><p>成功获取shell</p><h2 id="五、权限提升"><a href="#五、权限提升" class="headerlink" title="五、权限提升"></a>五、权限提升</h2><p>1、用户信息收集</p><p><img src="/img/OSCP-Sumo/image-20240713205441368.png" alt="image-20240713205441368"></p><p>只有一个<code>sumo</code>用户</p><p><img src="/img/OSCP-Sumo/image-20240713210829250.png" alt="image-20240713210829250"></p><p>啥也米有</p><p>2、高权限文件</p><p><img src="/img/OSCP-Sumo/image-20240713211017228.png" alt="image-20240713211017228"></p><p>啥也没有</p><p>3、脏牛提权</p><p>查看内核版本，版本较低，尝试脏牛提权</p><p><img src="/img/OSCP-Sumo/image-20240713211408827.png" alt="image-20240713211408827"></p><p>查找提权脚本</p><p><img src="/img/OSCP-Sumo/image-20240713212145891.png" alt="image-20240713212145891"></p><p>对该cpp文件在本地进行编译</p><p><img src="/img/OSCP-Sumo/image-20240713212454223.png" alt="image-20240713212454223"></p><p>通过python开启的http服务，上传到靶机</p><p><img src="/img/OSCP-Sumo/image-20240713212531447.png" alt="image-20240713212531447"></p><p>之后添加执行权限并执行</p><p><img src="/img/OSCP-Sumo/image-20240713212717174.png" alt="image-20240713212717174"></p><p>提权失败</p><p>4、脏牛提权其他姿势</p><p><img src="/img/OSCP-Sumo/image-20240713212805575.png" alt="image-20240713212805575"></p><p>查看编译语句</p><p><img src="/img/OSCP-Sumo/image-20240713212958765.png" alt="image-20240713212958765"></p><p>上传到靶机进行编译执行</p><p><img src="/img/OSCP-Sumo/image-20240713214237675.png" alt="image-20240713214237675"></p><p>用ssh连接提权到root</p><p><img src="/img/OSCP-Sumo/image-20240713214351227.png" alt="image-20240713214351227"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> OSCP系列靶场 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oscp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【OSCP系列】OSCP靶机—Photographer</title>
       <link href="/2024/07/01/OSCP-Photographer/"/>
       <url>/2024/07/01/OSCP-Photographer/</url>
