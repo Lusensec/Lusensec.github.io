@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【OSCP系列】OSCP靶机—BTRsys-2.1</title>
+      <link href="/2024/07/14/OSCP-BTRsys-2-1/"/>
+      <url>/2024/07/14/OSCP-BTRsys-2-1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="OSCP系列靶机—BTRsys-2-1"><a href="#OSCP系列靶机—BTRsys-2-1" class="headerlink" title="OSCP系列靶机—BTRsys-2.1"></a>OSCP系列靶机—BTRsys-2.1</h1><h2 id="一、主机发现"><a href="#一、主机发现" class="headerlink" title="一、主机发现"></a>一、主机发现</h2><p><img src="/img/OSCP-BTRsys-2-1/image-20240714120227641.png" alt="image-20240714120227641"></p><h2 id="二、端口扫描"><a href="#二、端口扫描" class="headerlink" title="二、端口扫描"></a>二、端口扫描</h2><p>1、快速扫描</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714120516228.png" alt="image-20240714120516228"></p><p>2、全端口扫描</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714121450552.png" alt="image-20240714121450552"></p><p>3、服务系统探测</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714121612617.png" alt="image-20240714121612617"></p><p>4、漏洞探测</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714122713884.png" alt="image-20240714122713884"></p><p>80端口扫到了一些目录，有wordpress框架和robots.txt 文件，以及易受DOS攻击</p><h2 id="三、ftp信息收集"><a href="#三、ftp信息收集" class="headerlink" title="三、ftp信息收集"></a>三、ftp信息收集</h2><p><img src="/img/OSCP-BTRsys-2-1/image-20240714123426992.png" alt="image-20240714123426992"></p><p>输入<code>binary</code>进入二进制模式</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714123541542.png" alt="image-20240714123541542"></p><p>啥也没有，肯定没这么容易；尝试文件上传</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714123756178.png" alt="image-20240714123756178"></p><p>也失败了，暂时收集到这里</p><h2 id="四、HTTP信息收集"><a href="#四、HTTP信息收集" class="headerlink" title="四、HTTP信息收集"></a>四、HTTP信息收集</h2><p>1、首页</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714123918510.png" alt="image-20240714123918510"></p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714123931298.png" alt="image-20240714123931298"></p><p>2、目录扫描</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714124456779.png" alt="image-20240714124456779"></p><p>3、wordpress信息收集</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714124600748.png" alt="image-20240714124600748"></p><p>4、wpscan 扫描用户名</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpscan --url http://192.168.31.69/wordpress/ --enumerate u </span><br></pre></td></tr></table></figure><p><img src="/img/OSCP-BTRsys-2-1/image-20240714124943626.png" alt="image-20240714124943626"></p><p>有<code>btrisk</code>和<code>admin</code>两个用户；<code>cewl </code>收集密码信息</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cewl http://192.168.31.69/wordpress/ -w pass.txt </span><br></pre></td></tr></table></figure><p>5、对收集的用户名进行爆破</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpscan --url &quot;http://192.168.31.69/wordpress/&quot; -P &quot;pass.txt&quot; --usernames user.txt</span><br></pre></td></tr></table></figure><p><img src="/img/OSCP-BTRsys-2-1/image-20240714125458846.png" alt="image-20240714125458846"></p><p>没有发现密码，使用其他的字典进行爆破</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714125935168.png" alt="image-20240714125935168"></p><p>找到admin 的密码admin</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714130018947.png" alt="image-20240714130018947"></p><p>登陆成功</p><h2 id="五、Getshell"><a href="#五、Getshell" class="headerlink" title="五、Getshell"></a>五、Getshell</h2><p>在后台对wordpress 的主题进行编辑</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714132617563.png" alt="image-20240714132617563"></p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714132623180.png" alt="image-20240714132623180"></p><p>改成php反弹shell代码进行监听</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714132800786.png" alt="image-20240714132800786"></p><p>获取shell</p><h2 id="六、权限提升"><a href="#六、权限提升" class="headerlink" title="六、权限提升"></a>六、权限提升</h2><h3 id="1、提权到btrisk"><a href="#1、提权到btrisk" class="headerlink" title="1、提权到btrisk"></a>1、提权到btrisk</h3><p>1、信息收集</p><p>查看历史命令的时候发现了数据库root 的密码</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714134159018.png" alt="image-20240714134159018"></p><p>2、数据库查看</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714134324611.png" alt="image-20240714134324611"></p><p>对<code>wordpress</code>数据库进行查看</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714134534395.png" alt="image-20240714134534395"></p><p>这个<code>btrisk</code>跟靶机中普通用户的名字一样，密码进行md5解密</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714134656488.png" alt="image-20240714134656488"></p><p>ssh连接，提权到<code>btrisk</code></p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714134810020.png" alt="image-20240714134810020"></p><h3 id="2、提权到root"><a href="#2、提权到root" class="headerlink" title="2、提权到root"></a>2、提权到root</h3><p>sudo滥用提权</p><p><img src="/img/OSCP-BTRsys-2-1/image-20240714135143513.png" alt="image-20240714135143513"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> OSCP系列靶场 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oscp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【OSCP系列】OSCP靶机—Sumo</title>
       <link href="/2024/07/13/OSCP-Sumo/"/>
       <url>/2024/07/13/OSCP-Sumo/</url>
