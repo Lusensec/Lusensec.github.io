@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【Hack The Box系列】Oopsie | Lusen的小窝</title><meta name="author" content="Lusen"><meta name="copyright" content="Lusen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Hack The Box系列—Oopsie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Hack The Box系列】Oopsie">
+<meta property="og:url" content="http://example.com/2024/07/16/Hackthebox-Oopsie/index.html">
+<meta property="og:site_name" content="Lusen的小窝">
+<meta property="og:description" content="Hack The Box系列—Oopsie">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/Hackthebox.jpg">
+<meta property="article:published_time" content="2024-07-16T06:46:10.000Z">
+<meta property="article:modified_time" content="2024-07-16T11:37:22.873Z">
+<meta property="article:author" content="Lusen">
+<meta property="article:tag" content="Hackthebox">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/Hackthebox.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/07/16/Hackthebox-Oopsie/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【Hack The Box系列】Oopsie',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-16 19:37:22'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 7.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/friend_404.gif" data-original="/img/logo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E7%BA%A2%E9%98%9F%E5%85%A5%E4%BE%B5/"><i class="fa-fw fas fa-folder-open"></i><span> 红队入侵</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E8%93%9D%E9%98%9F%E5%BA%94%E6%80%A5/"><i class="fa-fw fas fa-folder-open"></i><span> 蓝队应急</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%AE%A1%E8%AE%A1/"><i class="fa-fw fas fa-folder-open"></i><span> 复现与审计</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 内网渗透</span></a></div><div class="menus_item"><a class="site-page" href="/categories/Python%E6%AD%A6%E5%99%A8%E5%BA%93/"><i class="fa-fw fas fa-folder-open"></i><span> Python武器库</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%85%8D%E6%9D%80%E4%B8%93%E6%A0%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 免杀专栏</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 靶场系列</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/Vulnhub%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Vulnhub系列靶场</span></a></li><li><a class="site-page child" href="/categories/OSCP%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> OSCP系列靶场</span></a></li><li><a class="site-page child" href="/categories/%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> 应急靶场</span></a></li><li><a class="site-page child" href="/categories/%E7%8E%84%E6%9C%BA%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> 玄机应急靶场</span></a></li><li><a class="site-page child" href="/categories/Hackthebox%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Hackthebox系列靶场</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/CTF%E7%AB%9E%E8%B5%9B/"><i class="fa-fw fas fa-folder-open"></i><span> CTF竞赛</span></a></li><li><a class="site-page child" href="/categories/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%99%A8/"><i class="fa-fw fas fa-folder-open"></i><span> 漏洞扫描器</span></a></li><li><a class="site-page child" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><i class="fa-fw fas fa-folder-open"></i><span> 基础知识</span></a></li><li><a class="site-page child" href="/categories/%E5%85%B6%E4%BB%96%E7%BB%8F%E9%AA%8C/"><i class="fa-fw fas fa-folder-open"></i><span> 其他经验</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/Hackthebox.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Lusen的小窝"><span class="site-name">Lusen的小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E7%BA%A2%E9%98%9F%E5%85%A5%E4%BE%B5/"><i class="fa-fw fas fa-folder-open"></i><span> 红队入侵</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E8%93%9D%E9%98%9F%E5%BA%94%E6%80%A5/"><i class="fa-fw fas fa-folder-open"></i><span> 蓝队应急</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%AE%A1%E8%AE%A1/"><i class="fa-fw fas fa-folder-open"></i><span> 复现与审计</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 内网渗透</span></a></div><div class="menus_item"><a class="site-page" href="/categories/Python%E6%AD%A6%E5%99%A8%E5%BA%93/"><i class="fa-fw fas fa-folder-open"></i><span> Python武器库</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%85%8D%E6%9D%80%E4%B8%93%E6%A0%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 免杀专栏</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 靶场系列</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/Vulnhub%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Vulnhub系列靶场</span></a></li><li><a class="site-page child" href="/categories/OSCP%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> OSCP系列靶场</span></a></li><li><a class="site-page child" href="/categories/%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> 应急靶场</span></a></li><li><a class="site-page child" href="/categories/%E7%8E%84%E6%9C%BA%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> 玄机应急靶场</span></a></li><li><a class="site-page child" href="/categories/Hackthebox%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Hackthebox系列靶场</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/CTF%E7%AB%9E%E8%B5%9B/"><i class="fa-fw fas fa-folder-open"></i><span> CTF竞赛</span></a></li><li><a class="site-page child" href="/categories/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%99%A8/"><i class="fa-fw fas fa-folder-open"></i><span> 漏洞扫描器</span></a></li><li><a class="site-page child" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><i class="fa-fw fas fa-folder-open"></i><span> 基础知识</span></a></li><li><a class="site-page child" href="/categories/%E5%85%B6%E4%BB%96%E7%BB%8F%E9%AA%8C/"><i class="fa-fw fas fa-folder-open"></i><span> 其他经验</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【Hack The Box系列】Oopsie</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-16T06:46:10.000Z" title="发表于 2024-07-16 14:46:10">2024-07-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-16T11:37:22.873Z" title="更新于 2024-07-16 19:37:22">2024-07-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Hackthebox%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/">Hackthebox系列靶场</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">362</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【Hack The Box系列】Oopsie"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Hack-The-Box系列—Oopsie"><a href="#Hack-The-Box系列—Oopsie" class="headerlink" title="Hack The Box系列—Oopsie"></a>Hack The Box系列—Oopsie</h1><p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240716150033322.png" alt="image-20240716150033322"></p>
+<h2 id="一、端口扫描"><a href="#一、端口扫描" class="headerlink" title="一、端口扫描"></a>一、端口扫描</h2><p>1、快速扫描</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715172908789.png" alt="image-20240715172908789"></p>
+<p>2、全端口扫描</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715173042498.png" alt="image-20240715173042498"></p>
+<p>3、漏洞扫描</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715173553044.png" alt="image-20240715173553044"></p>
+<h2 id="二、HTTP信息收集"><a href="#二、HTTP信息收集" class="headerlink" title="二、HTTP信息收集"></a>二、HTTP信息收集</h2><p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715173614805.png" alt="image-20240715173614805"></p>
+<p>1、http源代码查看</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715173822857.png" alt="image-20240715173822857"></p>
+<p>2、登陆页</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715173942308.png" alt="image-20240715173942308"></p>
+<h2 id="三、Getshell"><a href="#三、Getshell" class="headerlink" title="三、Getshell"></a>三、Getshell</h2><h3 id="1、越权"><a href="#1、越权" class="headerlink" title="1、越权"></a>1、越权</h3><p>尝试弱口令不行之后，通过游客身份进入，找到一个文件上传的地方，提示需要admin权限</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715174144073.png" alt="image-20240715174144073"></p>
+<p>回到账户信息这儿</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715174246674.png" alt="image-20240715174246674"></p>
+<p>对id 号进行遍历</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715174821290.png" alt="image-20240715174821290"></p>
+<p>发现管理员和超级管理员</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715174942277.png" alt="image-20240715174942277"></p>
+<p>当然是使用超级管理员的权限了；我们需要记住超级管理员的ID号和名字，之后伪造cookie</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715175205817.png" alt="image-20240715175205817"></p>
+<p>拦截Uploads 的请求页面进行cookie伪造</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715175317794.png" alt="image-20240715175317794"></p>
+<p>之后放包，出来上传页面</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715175338382.png" alt="image-20240715175338382"></p>
+<h3 id="2、文件上传getshell"><a href="#2、文件上传getshell" class="headerlink" title="2、文件上传getshell"></a>2、文件上传getshell</h3><p>把php反弹shell 的文件拿过来</p>
+<img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715175516377.png" alt="image-20240715175516377" style="zoom:150%;" />
+
+<p>更改成自己的IP和端口，之后用nc 进行监听</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715175602005.png" alt="image-20240715175602005"></p>
+<p>注意，上传过程中依然需要抓包改cookie</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715175706601.png" alt="image-20240715175706601"></p>
+<p>提示上传成功</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715175734909.png" alt="image-20240715175734909"></p>
+<p>那么文件上传的路径在哪儿，凭借感觉，总在某个upload 或 uploads 目录下</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715181616228.png" alt="image-20240715181616228"></p>
+<p>成功获取shell</p>
+<h2 id="四、权限提升"><a href="#四、权限提升" class="headerlink" title="四、权限提升"></a>四、权限提升</h2><h3 id="1、提权到robert"><a href="#1、提权到robert" class="headerlink" title="1、提权到robert"></a>1、提权到robert</h3><p>1、查找敏感文件</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715184012118.png" alt="image-20240715184012118"></p>
+<p>发现数据库的账号密码</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715184138033.png" alt="image-20240715184138033"></p>
+<p>登陆成功；没找到啥有用的信息，突然想到会不会数据库的密码就是用户的密码</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715184958853.png" alt="image-20240715184958853"></p>
+<h3 id="2、提权到root"><a href="#2、提权到root" class="headerlink" title="2、提权到root"></a>2、提权到root</h3><p>1、查找suid 文件</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715185258297.png" alt="image-20240715185258297"></p>
+<p>2、尝试运行这个文件</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715185433394.png" alt="image-20240715185433394"></p>
+<p>3、利用这个文件可以越权查看文件</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Hackthebox-Oopsie/image-20240715185525361.png" alt="image-20240715185525361"></p>
+<p>4、可以越权查看<code>/etc/shadow</code>之后爆破密码等</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Lusen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/07/16/Hackthebox-Oopsie/">http://example.com/2024/07/16/Hackthebox-Oopsie/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Lusen的小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hackthebox/">Hackthebox</a></div><div class="post_share"><div class="social-share" data-image="/img/Hackthebox.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/07/16/Hackthebox-Vaccine/" title="【Hack The Box系列】Vaccine"><img class="cover" src="/img/friend_404.gif" data-original="/img/Hackthebox.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【Hack The Box系列】Vaccine</div></div></a></div><div class="next-post pull-right"><a href="/2024/07/14/Hackthebox-Archetype/" title="【Hack The Box系列】Archetype"><img class="cover" src="/img/friend_404.gif" data-original="/img/Hackthebox.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【Hack The Box系列】Archetype</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/07/14/Hackthebox-Archetype/" title="【Hack The Box系列】Archetype"><img class="cover" src="/img/friend_404.gif" data-original="/img/Hackthebox.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-14</div><div class="title">【Hack The Box系列】Archetype</div></div></a></div><div><a href="/2024/07/16/Hackthebox-Vaccine/" title="【Hack The Box系列】Vaccine"><img class="cover" src="/img/friend_404.gif" data-original="/img/Hackthebox.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-16</div><div class="title">【Hack The Box系列】Vaccine</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/friend_404.gif" data-original="/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Lusen</div><div class="author-info__description">学无止境</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Lusensec" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://wpa.qq.com/msgrd?v=3&amp;uin=811209815&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:811209815@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章和相关工具仅供学习参考，禁止用于其他！！！未经授权禁止利用文章中的技术或工具对任何计算机或其他终端系统进行入侵操作，否则造成的直接或间接的后果和损失，均由使用者本人承担，本人不为此承担任何责任。如需转载或传播文章，需保证文章的完整性！文章如有侵权行为，请联系告知，我们会立即删除或修改并致歉！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hack-The-Box%E7%B3%BB%E5%88%97%E2%80%94Oopsie"><span class="toc-text">Hack The Box系列—Oopsie</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-text">一、端口扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81HTTP%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-text">二、HTTP信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81Getshell"><span class="toc-text">三、Getshell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E8%B6%8A%E6%9D%83"><span class="toc-text">1、越权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0getshell"><span class="toc-text">2、文件上传getshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87"><span class="toc-text">四、权限提升</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%8F%90%E6%9D%83%E5%88%B0robert"><span class="toc-text">1、提权到robert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E6%8F%90%E6%9D%83%E5%88%B0root"><span class="toc-text">2、提权到root</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/16/Hackthebox-Vaccine/" title="【Hack The Box系列】Vaccine"><img src="/img/friend_404.gif" data-original="/img/Hackthebox.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Hack The Box系列】Vaccine"/></a><div class="content"><a class="title" href="/2024/07/16/Hackthebox-Vaccine/" title="【Hack The Box系列】Vaccine">【Hack The Box系列】Vaccine</a><time datetime="2024-07-16T11:36:55.000Z" title="发表于 2024-07-16 19:36:55">2024-07-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/16/Hackthebox-Oopsie/" title="【Hack The Box系列】Oopsie"><img src="/img/friend_404.gif" data-original="/img/Hackthebox.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Hack The Box系列】Oopsie"/></a><div class="content"><a class="title" href="/2024/07/16/Hackthebox-Oopsie/" title="【Hack The Box系列】Oopsie">【Hack The Box系列】Oopsie</a><time datetime="2024-07-16T06:46:10.000Z" title="发表于 2024-07-16 14:46:10">2024-07-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/14/Hackthebox-Archetype/" title="【Hack The Box系列】Archetype"><img src="/img/friend_404.gif" data-original="/img/Hackthebox.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Hack The Box系列】Archetype"/></a><div class="content"><a class="title" href="/2024/07/14/Hackthebox-Archetype/" title="【Hack The Box系列】Archetype">【Hack The Box系列】Archetype</a><time datetime="2024-07-14T11:37:59.000Z" title="发表于 2024-07-14 19:37:59">2024-07-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/14/OSCP-BTRsys-2-1/" title="【OSCP系列】OSCP靶机—BTRsys-2.1"><img src="/img/friend_404.gif" data-original="/img/oscp.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【OSCP系列】OSCP靶机—BTRsys-2.1"/></a><div class="content"><a class="title" href="/2024/07/14/OSCP-BTRsys-2-1/" title="【OSCP系列】OSCP靶机—BTRsys-2.1">【OSCP系列】OSCP靶机—BTRsys-2.1</a><time datetime="2024-07-14T05:52:47.000Z" title="发表于 2024-07-14 13:52:47">2024-07-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/13/OSCP-Sumo/" title="【OSCP系列】OSCP靶机—Sumo"><img src="/img/friend_404.gif" data-original="/img/oscp.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【OSCP系列】OSCP靶机—Sumo"/></a><div class="content"><a class="title" href="/2024/07/13/OSCP-Sumo/" title="【OSCP系列】OSCP靶机—Sumo">【OSCP系列】OSCP靶机—Sumo</a><time datetime="2024-07-13T13:45:12.000Z" title="发表于 2024-07-13 21:45:12">2024-07-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/Hackthebox.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Lusen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="true" data-text="富强💖,民主💖,文明💖,和谐💖,平等💖,公正💖,法治💖,爱国💖,敬业💖,诚信💖,友善💖" data-fontsize="20px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,d=o();function o(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=o());for(var e,i=0;i<d.length;i++)0<=(e=(e=d[i]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,a,n,o=d[i];e=function(){d=d.filter(function(t){return o!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(o)},(t=o).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,n=t.getAttribute("data-original"),a.onload=function(){t.src=n,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=n},t.src!==n&&(a.src=n)))}()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)}(this);</script></body></html>
