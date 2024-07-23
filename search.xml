@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【基础知识】VirtualBox和VMware的kali搭配食用</title>
+      <link href="/2024/07/23/Nouns-VirtualBox-VMware-networking/"/>
+      <url>/2024/07/23/Nouns-VirtualBox-VMware-networking/</url>
+      
+        <content type="html"><![CDATA[<h1 id="VirtualBox和VMware的kali搭配食用"><a href="#VirtualBox和VMware的kali搭配食用" class="headerlink" title="VirtualBox和VMware的kali搭配食用"></a>VirtualBox和VMware的kali搭配食用</h1><h2 id="一、VirtualBox虚拟机的配置"><a href="#一、VirtualBox虚拟机的配置" class="headerlink" title="一、VirtualBox虚拟机的配置"></a>一、VirtualBox虚拟机的配置</h2><p>这里任何机器都需要配置成这样</p><p><img src="/img/Nouns-VirtualBox-VMware-networking/image-20240723160128312.png" alt="image-20240723160128312"></p><h2 id="二、VMware的网络配置"><a href="#二、VMware的网络配置" class="headerlink" title="二、VMware的网络配置"></a>二、VMware的网络配置</h2><p>这里需要跟上面VirtualBox虚拟机的配置保持在同一个网卡</p><p>有的小伙伴第一次整，VMware的配置这里可能没有这个网卡，我的建议是重启下电脑</p><img src="/img/Nouns-VirtualBox-VMware-networking/image-20240723160247626.png" alt="image-20240723160247626" style="zoom:150%;" /><h2 id="三、VMware中kali-的配置"><a href="#三、VMware中kali-的配置" class="headerlink" title="三、VMware中kali 的配置"></a>三、VMware中kali 的配置</h2><h3 id="1、桥接网卡（第一块网卡）"><a href="#1、桥接网卡（第一块网卡）" class="headerlink" title="1、桥接网卡（第一块网卡）"></a>1、桥接网卡（第一块网卡）</h3><p>我们需要把网卡配置成桥接模式，注意，是第一块网卡，也就是kali 默认的那块</p><p><img src="/img/Nouns-VirtualBox-VMware-networking/image-20240723160550901.png" alt="image-20240723160550901"></p><h3 id="2、NAT网卡"><a href="#2、NAT网卡" class="headerlink" title="2、NAT网卡"></a>2、NAT网卡</h3><p>配置好第一块网卡之后，再添加一块NAT网卡，是为了方便与网络交互，避免下载某个工具无法上网的问题</p><p><img src="/img/Nouns-VirtualBox-VMware-networking/image-20240723160722820.png" alt="image-20240723160722820"></p><h3 id="3、修改配置文件"><a href="#3、修改配置文件" class="headerlink" title="3、修改配置文件"></a>3、修改配置文件</h3><p>网卡配好之后，打开kali，需要修改配置文件</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/network/interfaces</span><br></pre></td></tr></table></figure><p>添加dhcp，如下图所示</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto eth1</span><br><span class="line">iface eth1 inet dhcp</span><br></pre></td></tr></table></figure><p><img src="/img/Nouns-VirtualBox-VMware-networking/image-20240723160955764.png" alt="image-20240723160955764"></p><p>之后重启网络即可</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart networking.service</span><br></pre></td></tr></table></figure><p>当然，有的小伙伴这里重启之后感觉没啥用，网段也没变化等待；建议重启kali</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 基础知识 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> VirtualBox </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【OSCP系列】OSCP靶机-BTRsys1</title>
       <link href="/2024/07/22/OSCP-BTRsys1/"/>
       <url>/2024/07/22/OSCP-BTRsys1/</url>
