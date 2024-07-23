@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【PHP代码审计】SQL注入审计（一）</title>
+      <link href="/2024/07/24/Code-Audit-PHP-sqli-labs1/"/>
+      <url>/2024/07/24/Code-Audit-PHP-sqli-labs1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="【PHP代码审计】GET型SQL注入审计"><a href="#【PHP代码审计】GET型SQL注入审计" class="headerlink" title="【PHP代码审计】GET型SQL注入审计"></a>【PHP代码审计】GET型SQL注入审计</h1><h2 id="一、seay源代码审计系统"><a href="#一、seay源代码审计系统" class="headerlink" title="一、seay源代码审计系统"></a>一、seay源代码审计系统</h2><p>先看下seay源代码审计系统怎么说</p><p><img src="/img/Code-Audit-PHP-sqli-labs1/image-20240723231808213.png" alt="image-20240723231808213"></p><p>只给了一个可能存在的任意文件写入漏洞，并没有给sql 相关漏洞，这是因为seay审计系统对有引号包含的sql 语句是不会做出嫌疑的。但如果是未有引号的第二关，则会爆出漏洞</p><p><img src="/img/Code-Audit-PHP-sqli-labs1/image-20240723233039769.png" alt="image-20240723233039769"></p><p>继续往下，看第一关的文件写入内容</p><p><img src="/img/Code-Audit-PHP-sqli-labs1/image-20240723232235588.png" alt="image-20240723232235588"></p><p>那这个地方确实存在任意文件写入，但是写入的文件类型是写死的，因此，即便写入webshell，也无法直接的getshell，需要结合其他的如解析漏洞、文件包含达到getshell；当然，我们的重点不在这里，后面也会忽略这里。</p><h2 id="二、GET型SQL注入审计"><a href="#二、GET型SQL注入审计" class="headerlink" title="二、GET型SQL注入审计"></a>二、GET型SQL注入审计</h2><p>审源代码</p><p><img src="/img/Code-Audit-PHP-sqli-labs1/image-20240723234000503.png" alt="image-20240723234000503"></p><p>很明显，在拼接SQL语句之前，没有对输入的参数<code>$id</code>做过滤，也没有对单双引号做过滤，导致SQL语句拼接，造成注入。</p><h2 id="三、加固操作"><a href="#三、加固操作" class="headerlink" title="三、加固操作"></a>三、加固操作</h2><h3 id="1、PHP5-4版本以下"><a href="#1、PHP5-4版本以下" class="headerlink" title="1、PHP5.4版本以下"></a>1、PHP5.4版本以下</h3><p>除了手工添加过滤之外，可以开启全局配置<code>magic_quotes_gpc</code></p><p><img src="/img/Code-Audit-PHP-sqli-labs1/image-20240723235248379.png" alt="image-20240723235248379"></p><blockquote><p>当开启之后，会自动将GET、POST、COOKIE变量中的单引号、双引号、反斜杠以及空字符(NULL)的前面再加上一个反斜杠</p></blockquote><p>前后对比，一样的SQL语句：</p><p><img src="/img/Code-Audit-PHP-sqli-labs1/image-20240723235451003.png" alt="image-20240723235451003"></p><p>在这种情况下，是不存在SQL注入的，当然，如果这里是数字型的话，还是会存在漏洞，因为数字型不需要引号。比如第二关的情况，对比如下：</p><p><img src="/img/Code-Audit-PHP-sqli-labs1/image-20240723235707002.png" alt="image-20240723235707002"></p><p>但此时也是会存在其他漏洞，如下：</p><ol><li>使用的GBK编码，也还是会存在漏洞，也就是宽字节注入，那么留在后面讲解这个。</li><li>在PHP5 中该设置并不会过滤$_SERVER变量，导致很多类似client-ip、referer 一类的漏洞依然能够利用</li></ol><h3 id="2、PHP5-4以上"><a href="#2、PHP5-4以上" class="headerlink" title="2、PHP5.4以上"></a>2、PHP5.4以上</h3><p>1、方法一：addslashes函数</p><p>因为上面的<code>magic_quotes_gpc</code>配置在PHP 5.4之后被取消，5.4之后的配置文件是没有这个选项的，因此需要手动添加过滤。其中<code>addslashes</code>函数是专门用于转义的函数，不仅在SQL注入，在XSS中也经常的会遇到这个函数。如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$id=$_GET[&#x27;id&#x27;];</span><br><span class="line">$id = addslashes($id);</span><br><span class="line">$sql=&quot;SELECT * FROM users WHERE id=&#x27;$id&#x27; LIMIT 0,1&quot;;</span><br></pre></td></tr></table></figure><p>那么，将会阻止引号的带入，从而有效的防御SQL注入</p><p><img src="/img/Code-Audit-PHP-sqli-labs1/image-20240724000713694.png" alt="image-20240724000713694"></p><p>2、方法二：mysqli_real_escape_string 函数</p><p>另外，在SQL查询中，也会经常性的遇到<code>mysqli_real_escape_string</code>函数，是专门用于SQL查询中进行转义的函数，防御SQL注入也是非常有效，用法跟magic_quotes_gpc 几乎一样，只是多了一个数据库连接变量</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$id=$_GET[&#x27;id&#x27;];</span><br><span class="line">$id = mysqli_real_escape_string($con1,$id);</span><br><span class="line">$sql=&quot;SELECT * FROM users WHERE id=&#x27;$id&#x27; LIMIT 0,1&quot;;</span><br></pre></td></tr></table></figure><p>3、预编译</p><p>这个大家肯定耳熟能详了，这里就简单的演示下写法，不具体展开</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$stmt = $con1-&gt;prepare(&quot;SELECT * FROM users WHERE id=? LIMIT 0,1&quot;);</span><br><span class="line">$stmt-&gt;bind_param(&quot;i&quot;, $id);</span><br><span class="line">$stmt-&gt;execute();</span><br><span class="line">$result = $stmt-&gt;get_result();</span><br><span class="line">$row = $result-&gt;fetch_array(MYSQLI_BOTH);</span><br></pre></td></tr></table></figure><p>当然这样子已经改变了原来的写法</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 复现与审计 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 代码审计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【CTF竞赛】[NISACTF 2022]popchains—PHP反序列化POP链</title>
       <link href="/2024/07/23/CTF-competition-PHPserialize-pop/"/>
       <url>/2024/07/23/CTF-competition-PHPserialize-pop/</url>
