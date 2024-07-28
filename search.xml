@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【CTF竞赛】[HDCTF 2023]SearchMaster—SSTI注入</title>
+      <link href="/2024/07/28/CTF-competition-SSTI-injection/"/>
+      <url>/2024/07/28/CTF-competition-SSTI-injection/</url>
+      
+        <content type="html"><![CDATA[<h1 id="HDCTF-2023-SearchMaster—SSTI注入"><a href="#HDCTF-2023-SearchMaster—SSTI注入" class="headerlink" title="[HDCTF 2023]SearchMaster—SSTI注入"></a>[HDCTF 2023]SearchMaster—SSTI注入</h1><h2 id="一、看题"><a href="#一、看题" class="headerlink" title="一、看题"></a>一、看题</h2><p><img src="/img/CTF-competition-SSTI-injection/image-20240728194430099.png" alt="image-20240728194430099"></p><p>页面很干净，什么信息几乎都收集不到，但是给了一个<code>BUT YOU CAN POST ME A DATA</code>的提示，想让我们给他一个post 的data请求</p><h2 id="二、解题"><a href="#二、解题" class="headerlink" title="二、解题"></a>二、解题</h2><h3 id="1、POST请求"><a href="#1、POST请求" class="headerlink" title="1、POST请求"></a>1、POST请求</h3><p>那我们给他一个POST请求</p><p><img src="/img/CTF-competition-SSTI-injection/image-20240728194604129.png" alt="image-20240728194604129"></p><p>发现我们给他什么，他就输出什么</p><h3 id="2、验证SSTI注入漏洞"><a href="#2、验证SSTI注入漏洞" class="headerlink" title="2、验证SSTI注入漏洞"></a>2、验证SSTI注入漏洞</h3><p><img src="/img/CTF-competition-SSTI-injection/image-20240728194733538.png" alt="image-20240728194733538"></p>49做了执行，变成了49，证明存在SSTI注入<h3 id="3、验证是否是-Jinja2-模块"><a href="#3、验证是否是-Jinja2-模块" class="headerlink" title="3、验证是否是 Jinja2 模块"></a>3、验证是否是 Jinja2 模块</h3><p>只需要做<code>&#123;&#123;7*'7'&#125;&#125;</code>，返回7777777表示是 Jinja2 模块</p><blockquote><p>Jinja2 模块表示后端是Python</p><p>Twig 模块表示后端是PHP</p><p>当然，除此之外也可以用其他方法判断后端语言</p></blockquote><p><img src="/img/CTF-competition-SSTI-injection/image-20240728195206648.png" alt="image-20240728195206648"></p><p>判断是Twig 模块，表示后端是PHP</p><h3 id="4、解题"><a href="#4、解题" class="headerlink" title="4、解题"></a>4、解题</h3><p>直接一步到位</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;system(&#x27;ls&#x27;)&#125;&#125;</span><br></pre></td></tr></table></figure><p><img src="/img/CTF-competition-SSTI-injection/image-20240728200824653.png" alt="image-20240728200824653"></p><h3 id="5、题解之外"><a href="#5、题解之外" class="headerlink" title="5、题解之外"></a>5、题解之外</h3><p> 如果是Jinja2 模块，推荐使用焚靖工具</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m fenjing webui</span><br></pre></td></tr></table></figure><p><img src="/img/CTF-competition-SSTI-injection/image-20240728195435863.png" alt="image-20240728195435863"></p><p>在左侧选择post请求方式，表单和模板环境，即可执行，之后在下面执行命令即可</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CTF竞赛 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【OSCP系列】OSCP靶机-Dawn2</title>
       <link href="/2024/07/28/OSCP-Dawn2/"/>
       <url>/2024/07/28/OSCP-Dawn2/</url>
