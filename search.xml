@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【OSCP系列】OSCP靶机-Gaara</title>
+      <link href="/2024/08/20/OSCP-Gaara/"/>
+      <url>/2024/08/20/OSCP-Gaara/</url>
+      
+        <content type="html"><![CDATA[<h1 id="OSCP系列靶机—Gaara"><a href="#OSCP系列靶机—Gaara" class="headerlink" title="OSCP系列靶机—Gaara"></a>OSCP系列靶机—Gaara</h1><h2 id="一、主机发现"><a href="#一、主机发现" class="headerlink" title="一、主机发现"></a>一、主机发现</h2><p><img src="/img/OSCP-Gaara/image-20240818171416371.png" alt="image-20240818171416371"></p><h2 id="二、端口探测"><a href="#二、端口探测" class="headerlink" title="二、端口探测"></a>二、端口探测</h2><h3 id="1、全端口扫描"><a href="#1、全端口扫描" class="headerlink" title="1、全端口扫描"></a>1、全端口扫描</h3><p><img src="/img/OSCP-Gaara/image-20240818171536703.png" alt="image-20240818171536703"></p><p>仅仅存在两个端口，Apache 2.4.38 存在SSRF漏洞，不知道这个靶场会不会用得上</p><h3 id="2、探测服务版本"><a href="#2、探测服务版本" class="headerlink" title="2、探测服务版本"></a>2、探测服务版本</h3><p><img src="/img/OSCP-Gaara/image-20240818172419454.png" alt="image-20240818172419454"></p><p>linux 4.x-5.x ，版本稍高，估计不存在脏牛提权漏洞</p><h3 id="3、对端口进行漏洞探测"><a href="#3、对端口进行漏洞探测" class="headerlink" title="3、对端口进行漏洞探测"></a>3、对端口进行漏洞探测</h3><p><img src="/img/OSCP-Gaara/image-20240818171936357.png" alt="image-20240818171936357"></p><p>并未有漏洞发现</p><h2 id="三、HTTP信息收集"><a href="#三、HTTP信息收集" class="headerlink" title="三、HTTP信息收集"></a>三、HTTP信息收集</h2><h3 id="1、首页源代码信息收集"><a href="#1、首页源代码信息收集" class="headerlink" title="1、首页源代码信息收集"></a>1、首页源代码信息收集</h3><p><img src="/img/OSCP-Gaara/image-20240818172219685.png" alt="image-20240818172219685"></p><p>都很保守啊，只有一张外部链接的图片，我这个靶场环境问题图片没有显示出来</p><p><img src="/img/OSCP-Gaara/image-20240818172254302.png" alt="image-20240818172254302"></p><h3 id="2、目录扫描"><a href="#2、目录扫描" class="headerlink" title="2、目录扫描"></a>2、目录扫描</h3><p>这里需要准备大字典才行</p><p><img src="/img/OSCP-Gaara/image-20240818174935118.png" alt="image-20240818174935118"></p><p><img src="/img/OSCP-Gaara/image-20240818175014609.png" alt="image-20240818175014609"></p><p>啥也没有，不能把，果然，页面源代码给东西了</p><p><img src="/img/OSCP-Gaara/image-20240818175039632.png" alt="image-20240818175039632"></p><h2 id="四、Getshell"><a href="#四、Getshell" class="headerlink" title="四、Getshell"></a>四、Getshell</h2><p><img src="/img/OSCP-Gaara/image-20240818175259054.png" alt="image-20240818175259054"></p><p>似乎是三篇长的差不多的文章，简单翻译过后，在讲述某个故事</p><p>我们在三篇文章中搜索pass关键字，发现不一样的地方</p><p><img src="/img/OSCP-Gaara/image-20240818180001926.png" alt="image-20240818180001926"></p><p>尝试base64解密失败，看起来确实像base加密，尝试其他base解密</p><p><img src="/img/OSCP-Gaara/image-20240818180237934.png" alt="image-20240818180237934"></p><p>成功获取某个用户的账号密码，尝试ssh登陆</p><p><img src="/img/OSCP-Gaara/image-20240818180432566.png" alt="image-20240818180432566"></p><p>啊？密码不对，离了个大谱，尝试下爆破吧；成功爆破出来一个密码</p><p><img src="/img/OSCP-Gaara/image-20240820125758003.png" alt="image-20240820125758003"></p><p>成功Getsehll</p><p><img src="/img/OSCP-Gaara/image-20240820125910626.png" alt="image-20240820125910626"></p><h2 id="五、权限提升"><a href="#五、权限提升" class="headerlink" title="五、权限提升"></a>五、权限提升</h2><h3 id="1、信息收集"><a href="#1、信息收集" class="headerlink" title="1、信息收集"></a>1、信息收集</h3><p><img src="/img/OSCP-Gaara/image-20240820132010591.png" alt="image-20240820132010591"></p><p>给了一个提示，看一下</p><p><img src="/img/OSCP-Gaara/image-20240820132101723.png" alt="image-20240820132101723"></p><p>给AI 分析下</p><p><img src="/img/OSCP-Gaara/image-20240820132523801.png" alt="image-20240820132523801"></p><p>BF 语言写的程序，但是这个靶机似乎没有运行环境，暂时搁置</p><h3 id="2、权限提升"><a href="#2、权限提升" class="headerlink" title="2、权限提升"></a>2、权限提升</h3><p>查找高权限命令</p><p><img src="/img/OSCP-Gaara/image-20240820133020771.png" alt="image-20240820133020771"></p><p>查找gdb 提权命令，两句话提权</p><p><img src="/img/OSCP-Gaara/image-20240820133423265.png" alt="image-20240820133423265"></p><p>成功提权至root</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> OSCP系列靶场 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> oscp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【OSCP系列】OSCP靶机—driftingblues6</title>
       <link href="/2024/07/30/OSCP-driftingblues6/"/>
       <url>/2024/07/30/OSCP-driftingblues6/</url>
