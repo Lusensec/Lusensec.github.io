@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【课外经验】通过OpenVPN配置自己的加速器</title>
+      <link href="/2024/08/23/Extracurricular-experience-openvpn/"/>
+      <url>/2024/08/23/Extracurricular-experience-openvpn/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一、OpenVPN-服务端设置"><a href="#一、OpenVPN-服务端设置" class="headerlink" title="一、OpenVPN 服务端设置"></a>一、OpenVPN 服务端设置</h1><p>1、配置Openvpn 服务端，需要在阿*云等vps 服务器上设置，先安装</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install openvpn</span><br></pre></td></tr></table></figure><p>2、安装 OpenVPN 后，我们需要生成用于 VPN 隧道加密的静态密钥：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openvpn --genkey --secret static-OpenVPN.key</span><br></pre></td></tr></table></figure><p>3、接下来，我们需要启动 OpenVPN 服务端，并用&amp; 将服务端放置在后台</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo openvpn --dev tun --ifconfig 172.16.0.1 172.16.0.2 --cipher AES-256-CBC --secret static-OpenVPN.key &amp;</span><br></pre></td></tr></table></figure><p>4、如果操作正确，vps 现在应该有一个名为 <code>tun0</code> 的新网络接口，其 IP 地址为 <code>172.16.0.1</code></p><p>输入以下命令进行验证：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip a show tun0</span><br></pre></td></tr></table></figure><p>5、要进一步验证 VPN 服务器是否正常运行，请检查系统上的 UDP 端口 1194 是否已打开：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -anu | grep 1194</span><br></pre></td></tr></table></figure><p>有输出则确认VPN 服务器正常运行</p><p>6、确保vps 上的1194端口正常对外开放，没有被防火墙等拦截</p><h1 id="二、OpenVPN-客户端设置"><a href="#二、OpenVPN-客户端设置" class="headerlink" title="二、OpenVPN 客户端设置"></a>二、OpenVPN 客户端设置</h1><p>下面以linux为示例，windows同样</p><p>1、确保客户端有openvpn客户端</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install openvpn</span><br></pre></td></tr></table></figure><p>2、将VPN 隧道加密的静态密钥传入客户端，可以通过scp 命令进行ssh 的连接传输</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp user1@linuxconfig:/home/user1/static-OpenVPN.key .</span><br></pre></td></tr></table></figure><p>3、进行openvpn 的连接</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo openvpn --remote YOUR-OPENVPN-SERVER-IP-OR-HOST --dev tun --ifconfig 172.16.0.1 172.16.0.2 --cipher AES-256-CBC --secret static-OpenVPN.key &amp;</span><br></pre></td></tr></table></figure><p>4、VPN 隧道创建可能需要几秒钟的时间。如果成功，您应该看到以下消息：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Initialization Sequence Completed</span><br></pre></td></tr></table></figure><p>5、要确认与 VPN 服务器的成功连接，请尝试 ping 远程网络上的主机</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ping -c 1 172.16.0.1</span><br><span class="line">PING 172.16.0.1 (172.16.0.1) 56(84) bytes of data.</span><br><span class="line">64 bytes from 172.16.0.1: icmp_seq=1 ttl=64 time=0.061 ms</span><br><span class="line"></span><br><span class="line">--- 172.16.0.1 ping statistics ---</span><br><span class="line">1 packets transmitted, 1 received, 0% packet loss, time 0ms</span><br><span class="line">rtt min/avg/max/mdev = 0.061/0.061/0.061/0.000 ms</span><br></pre></td></tr></table></figure><p>参考链接：<a href="https://cn.linux-console.net/?p=10930">基本 Ubuntu 20.04 OpenVPN 客户端&#x2F;服务器连接设置 (linux-console.net)</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 其他经验 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> OpenVPN </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【OSCP系列】OSCP靶机—Vegeta</title>
       <link href="/2024/08/23/OSCP-Vegeta/"/>
       <url>/2024/08/23/OSCP-Vegeta/</url>
