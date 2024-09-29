@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Python武器库】成长型工具箱-Comprehensive_Growth_Toolbox</title>
+      <link href="/2024/09/29/Python-Comprehensive-Growth-Toolbox/"/>
+      <url>/2024/09/29/Python-Comprehensive-Growth-Toolbox/</url>
+      
+        <content type="html"><![CDATA[<h1 id="成长型工具箱—Comprehensive-Growth-Toolbox"><a href="#成长型工具箱—Comprehensive-Growth-Toolbox" class="headerlink" title="成长型工具箱—Comprehensive-Growth-Toolbox"></a>成长型工具箱—Comprehensive-Growth-Toolbox</h1><h2 id="零、个人使用"><a href="#零、个人使用" class="headerlink" title="零、个人使用"></a>零、个人使用</h2><p><img src="/img/Python-Comprehensive-Growth-Toolbox/image-20240929214223094.png" alt="image-20240929214223094"></p><p><img src="/img/Python-Comprehensive-Growth-Toolbox/image-20240929214356944.png" alt="image-20240929214356944"></p><p><img src="/img/Python-Comprehensive-Growth-Toolbox/image-20240929214409373.png" alt="image-20240929214409373"></p><p><img src="/img/Python-Comprehensive-Growth-Toolbox/image-20240929214500010.png" alt="image-20240929214500010"></p><h2 id="一、工具箱特色简介"><a href="#一、工具箱特色简介" class="headerlink" title="一、工具箱特色简介"></a>一、工具箱特色简介</h2><p>一、自主定义菜单栏和导航栏。可以伴随用户在从小白到大佬的整学习及使用的过程中不断收集工具，对工具做分类汇总， 让用户对工具变的更加趁手和深入应用。打造属于自己独有的工具箱</p><p>二、工具箱具备强大的多种环境应对能力。在面对 Windows、Linux 等以及红队、蓝队等不同的环境下依然能够让用户有工具可用，快速上手工作</p><p>三、工具箱具备面对工具的多种情况。根据工具的绝对路径、相对路径以及未安装 等情况做了不同的处理。</p><ol><li>绝对路径：适用于本机已经安装且无法移动的工具</li><li>相对路径：可以跟随工具箱一起移动，方便备份或者赠与他人</li><li>文件夹路径：方便手动启动的工具，可以直接打开工具所处的文件夹，以便应对更加复杂的情况，或zip等工具压缩包，使用时解压等情况</li><li>下载地址：方便多数不常用的且占据内存的小工具，只需要把他的下载路径保存下来，可以达到随用随下载，不占据内存</li><li>工具地址：某些工具运行在docker 或者其他虚拟机等网页地址，我们可以将其地址写入，点击即可直接用浏览器打开该网页</li></ol><p><strong>在使用前请先下载必要模块</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip3 install -r requests.txt</span><br><span class="line"></span><br><span class="line">// start.bat 和 start.sh 是启动程序</span><br></pre></td></tr></table></figure><h2 id="二、自主定义菜单栏、导航栏"><a href="#二、自主定义菜单栏、导航栏" class="headerlink" title="二、自主定义菜单栏、导航栏"></a>二、自主定义菜单栏、导航栏</h2><h3 id="1、菜单栏"><a href="#1、菜单栏" class="headerlink" title="1、菜单栏"></a>1、菜单栏</h3><p>自主添加菜单栏，设置工具分类</p><p><img src="/img/Python-Comprehensive-Growth-Toolbox/menu.png" alt="img.png"></p><p>这里的<code>对应文件夹</code>是方便相对工具的使用而设置，尽量设置成英文名称，防止工具使用出错。</p><p>同时，在后面的使用过程中，请把这个菜单栏对应的工具放置在这个文件夹目录下</p><p>颜色风格，是为了区分不同菜单栏下的工具而设置，通过颜色辨别</p><h3 id="2、导航栏"><a href="#2、导航栏" class="headerlink" title="2、导航栏"></a>2、导航栏</h3><p>自主添加导航栏，对工具的使用做一个细分</p><p><img src="/img/Python-Comprehensive-Growth-Toolbox/navigation_bar.png" alt="navigation_bar.png"></p><p>他需要我们在有菜单栏的情况下，在菜单栏下面做一个导航栏，方便对工具的使用做划分</p><h3 id="3、按钮工具"><a href="#3、按钮工具" class="headerlink" title="3、按钮工具"></a>3、按钮工具</h3><p>工具路径上面有说，这里就不在说明。</p><p>工具的分类和工具作用分别对应菜单栏和导航栏</p><p>重点说明启动方式</p><h4 id="一、直接打开"><a href="#一、直接打开" class="headerlink" title="一、直接打开"></a>一、直接打开</h4><p><img src="/img/Python-Comprehensive-Growth-Toolbox/zhijiedakai.png" alt="image-20240809142607583"></p><p>方便exe 这种不需要参数即可双击执行的工具</p><h4 id="二、命令行打开"><a href="#二、命令行打开" class="headerlink" title="二、命令行打开"></a>二、命令行打开</h4><p>则是方便 命令行工具，需要有参数才能启动的工具。在设置启动命令的时候，需要用 * 代替工具在命令中的位置，以防因路径问题而出错。</p><p>方便跟随工具箱一起移动，做备份或者赠与他人</p><h4 id="三、剩下的打开方式"><a href="#三、剩下的打开方式" class="headerlink" title="三、剩下的打开方式"></a>三、剩下的打开方式</h4><p>文件夹打开，就是打开工具所在的文件夹</p><p>链接打开，是适用于网页工具，打开工具所在的网页</p><p>下载链接，上面也有说，会将工具下载下来再使用；注意下载完之后需要右键修改启动命令才能运行打开</p><h2 id="三、临时笔记"><a href="#三、临时笔记" class="headerlink" title="三、临时笔记"></a>三、临时笔记</h2><p>用于对某些数据的临时记录，当工具箱关闭之后数据将会消失，但是切换菜单栏数据不会消失</p><p>同时，现在增加了搜索和替换功能</p><p><strong>搜索：</strong>ctrl + f 启用搜索功能</p><p><img src="/img/Python-Comprehensive-Growth-Toolbox/sousuo.png" alt="image-20240811235232718"></p><p><strong>替换：</strong>ctrl + h 启动替换功能</p><p><img src="/img/Python-Comprehensive-Growth-Toolbox/tihuan.png" alt="image-20240811235411008"></p><h2 id="四、本地shell"><a href="#四、本地shell" class="headerlink" title="四、本地shell"></a>四、本地shell</h2><p>可以简单的执行本地命令，但是不能进行彻底的交互式shell（即不能进行mysql连接，以及执行某个文件等）</p><p><img src="/img/Python-Comprehensive-Growth-Toolbox/image-20240820231504379.png" alt="image-20240820231504379"></p><h2 id="五、ChatAI对话模型"><a href="#五、ChatAI对话模型" class="headerlink" title="五、ChatAI对话模型"></a>五、ChatAI对话模型</h2><p>目前只支持kimi 的API ，需要在工具箱设置中配置好kimi 的api 才可以使用</p><p>kimi api 的获取方式，可以上网搜一下，有很多，需要到kimi 官网那里获取</p><p><img src="/img/Python-Comprehensive-Growth-Toolbox/image-20240929214330556.png" alt="image-20240929214330556"></p><p>在使用之前需要在当前目录下的cmd 中安装 openai 库</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip3 install -r requests.txt</span><br><span class="line">或</span><br><span class="line">pip3 install openai</span><br></pre></td></tr></table></figure><h2 id="六、下载地址"><a href="#六、下载地址" class="headerlink" title="六、下载地址"></a>六、下载地址</h2><p>GitHub地址：<a href="https://github.com/Lusensec/Comprehensive_Growth_Toolbox">Lusensec&#x2F;Comprehensive_Growth_Toolbox: 综合成长型工具箱 (github.com)</a></p><p>有意愿参加维护项目可在GitHub留言</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python武器库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python武器库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Vulfocus系列】Apache Solr代码执行漏洞 (CVE-2019-12409)</title>
       <link href="/2024/09/22/Vulfocus-solr-RCE/"/>
       <url>/2024/09/22/Vulfocus-solr-RCE/</url>
