@@ -1,19 +1,19 @@
 /* 为整个页面设置鼠标样式 */
 body {
-    cursor: url('../img/mouse.cur'), auto;
+    cursor: url(https://lusensec.github.io/img/mouse.cur), default;
 }
 
 /* 为链接设置鼠标样式 */
 a {
-    cursor: url('../img/mouse.cur'), pointer;
+    cursor: url(https://lusensec.github.io/img/mouse.cur), default;
 }
 
 /* 为图片设置鼠标样式 */
 img {
-    cursor: url('../img/mouse.cur'), pointer;
+    cursor: url(https://lusensec.github.io/img/mouse.cur), default;
 }
 
 /* 为按钮设置鼠标样式 */
 button {
-    cursor: url('../img/mouse.cur'), pointer;
+    cursor: url(https://lusensec.github.io/img/mouse.cur), default;
 }
