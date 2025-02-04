@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【红队入侵】CS水坑钓鱼攻击自动收杆</title>
+      <link href="/2025/02/04/Red-Team-Invasion-CS-fishing/"/>
+      <url>/2025/02/04/Red-Team-Invasion-CS-fishing/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一、CS配置钓鱼网站"><a href="#一、CS配置钓鱼网站" class="headerlink" title="一、CS配置钓鱼网站"></a>一、CS配置钓鱼网站</h1><p>1、开启一个名字叫做CDN的监听</p><p><img src="/img/Red-Team-Invasion-CS-fishing/image-20250204193141276.png" alt="image-20250204193141276"></p><p>2、配置网站克隆和恶意文件托管站点</p><p><img src="/img/Red-Team-Invasion-CS-fishing/image-20250204193307088.png" alt="image-20250204193307088"></p><p>恶意文件可以做免杀和RLO构造处理，使效果更逼真</p><h1 id="二、CSFish配置"><a href="#二、CSFish配置" class="headerlink" title="二、CSFish配置"></a>二、CSFish配置</h1><p>用到CSFish这款工具，地址：<a href="https://github.com/Lusensec/CSFish">Lusensec&#x2F;CSFish: 项目用于实现水坑钓鱼收杆&amp;CS上线提醒&amp;自动权限维持</a></p><p>1、开放在CS同服务器的apache服务器，需要运行php文件</p><p><img src="/img/Red-Team-Invasion-CS-fishing/image-20250204193454062.png" alt="image-20250204193454062"></p><p>2、修改CSFish配置信息</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">修改CSFish.cna第4行代码为你要迁移的进程名，此处默认为explorer.exe</span><br><span class="line">修改CSFish.cna第5行代码为自己CS监听器名称</span><br><span class="line">修改CSFish.cna第40行代码为自己PHP服务器地址</span><br><span class="line">修改fish.php第3行代码为自己钓鱼页面地址</span><br><span class="line">修改fish.php第64或第71行代码为自己飞书或者钉钉的webhook地址（两个填一个即可，推荐使用飞书）</span><br></pre></td></tr></table></figure><p>3、通过短链接或域名伪装apache服务地址发至受害人即可</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 红队入侵 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 水坑钓鱼 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Python武器库】VIP视频免费观看</title>
       <link href="/2025/01/03/Python-Video-cracking/"/>
       <url>/2025/01/03/Python-Video-cracking/</url>
