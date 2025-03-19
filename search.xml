@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【漏洞复现】Host头攻击</title>
+      <link href="/2025/03/19/VulnRep-host-header-attack/"/>
+      <url>/2025/03/19/VulnRep-host-header-attack/</url>
+      
+        <content type="html"><![CDATA[<h1 id="零、Host头攻击简介"><a href="#零、Host头攻击简介" class="headerlink" title="零、Host头攻击简介"></a>零、Host头攻击简介</h1><p>如果服务器直接信任Host头，未校验它的合法性，则攻击者可能能够使用此可控变量来注入Host，以操纵服务器端的行为。如：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;https://_SERVER[&#x27;HOST&#x27;]/support&quot;&gt;联系支持&lt;/a&gt;</span><br></pre></td></tr></table></figure><p>由于Host头实际上是用户可控制的，因此这种做法可能导致许多问题。如果未校验或者直接使用Host头，则Host头可以与一系列其他漏洞“组合拳”攻击，比如：</p><ul><li>缓存投毒</li><li>特殊业务功能的逻辑漏洞</li><li>基于路由的SSRF</li><li>经典服务端漏洞，如SQL注入（当Host被用于SQL语句时）等</li></ul><h1 id="一、密码重置中毒"><a href="#一、密码重置中毒" class="headerlink" title="一、密码重置中毒"></a>一、密码重置中毒</h1><p>来到靶场处，我们知道一个用户<code>wiener:peter</code>，登陆靶场后可以看到自己的邮箱</p><p><img src="/img/VulnRep-host-header-attack/image-20250319172320908.png" alt="image-20250319172320908"></p><p>这里我们利用的是忘记密码的功能，我们需要退出登录之后，重置密码</p><p><img src="/img/VulnRep-host-header-attack/image-20250319172502735.png" alt="image-20250319172502735"></p><p>注意到Host地址是：<code>0ae700bf042376a285c94e25009000f7.web-security-academy.net</code></p><p>返回查看我们的邮箱：<a href="https://exploit-0ac9003c0440762285f64d3001a600ed.exploit-server.net/email">https://exploit-0ac9003c0440762285f64d3001a600ed.exploit-server.net/email</a></p><p><img src="/img/VulnRep-host-header-attack/image-20250319174405505.png" alt="image-20250319174405505"></p><p>我们尝试修改Host，放包到重放器，修改Host 头，放包查看邮箱</p><p><img src="/img/VulnRep-host-header-attack/image-20250319175205058.png" alt="image-20250319175205058"></p><p>可以看到，成功修改Host头</p><p><img src="/img/VulnRep-host-header-attack/image-20250319175235352.png" alt="image-20250319175235352"></p><p>我们修改Host头为我们自己的主机</p><p>主机地址：<a href="https://exploit-0ac9003c0440762285f64d3001a600ed.exploit-server.net/">https://exploit-0ac9003c0440762285f64d3001a600ed.exploit-server.net/</a></p><p><img src="/img/VulnRep-host-header-attack/image-20250319175839822.png" alt="image-20250319175839822"></p><p>并修改为受害人姓名</p><p><img src="/img/VulnRep-host-header-attack/image-20250319180157294.png" alt="image-20250319180157294"></p><p>之后查看我们的主机日志，成功拿到重置密码链接的token值</p><p><img src="/img/VulnRep-host-header-attack/image-20250319180323139.png" alt="image-20250319180323139"></p><p>之后修改重置密码链接的token值，之后就可以重置carlos 用户的密码，进而登陆该账户</p><p><img src="/img/VulnRep-host-header-attack/image-20250319181821957.png" alt="image-20250319181821957"></p><h1 id="二、Host头攻击-缓存投毒"><a href="#二、Host头攻击-缓存投毒" class="headerlink" title="二、Host头攻击+缓存投毒"></a>二、Host头攻击+缓存投毒</h1><p>有时间再复现</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 复现与审计 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Host头攻击 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【漏洞复现】Ollama远程代码执行漏洞（CVE-2024-37032）</title>
       <link href="/2025/02/26/VulnRep-ollama/"/>
       <url>/2025/02/26/VulnRep-ollama/</url>
