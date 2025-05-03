@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【免杀专栏】Webshell 持续免杀-XG_NTAI</title>
+      <link href="/2025/05/03/Anti-AntiVirus-Webshell-XG-NTAI/"/>
+      <url>/2025/05/03/Anti-AntiVirus-Webshell-XG-NTAI/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一、XG-NTAI免杀介绍"><a href="#一、XG-NTAI免杀介绍" class="headerlink" title="一、XG_NTAI免杀介绍"></a>一、XG_NTAI免杀介绍</h1><p>用于Webshell木马免杀、流量加密传输</p><p>免杀冰蝎、哥斯拉等Webshell的ASP、PHP、JSP木马文件，生成冰蝎流量加密传输配置文件</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">本工具仅用于授权测试，请勿用于非法用途</span><br></pre></td></tr></table></figure><p>该工具早在以前就有关注，那时候的XG_NTAI才到1.3版本，如今都更新到了2.5版本，地址：<a href="https://github.com/xiaogang000/XG_NTAI">xiaogang000&#x2F;XG_NTAI: 用于Webshell木马免杀、流量加密传输，多多支持star</a></p><h1 id="二、使用示例"><a href="#二、使用示例" class="headerlink" title="二、使用示例"></a>二、使用示例</h1><p>有空再搞</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 免杀专栏 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 免杀 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【漏洞复现】Host头攻击</title>
       <link href="/2025/03/19/VulnRep-host-header-attack/"/>
       <url>/2025/03/19/VulnRep-host-header-attack/</url>
