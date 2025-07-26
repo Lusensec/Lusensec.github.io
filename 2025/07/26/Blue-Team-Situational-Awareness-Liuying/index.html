@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【态势感知】流影态势感知设备安装和使用 | Lusen的小窝</title><meta name="author" content="Lusen"><meta name="copyright" content="Lusen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="【态势感知】流影态势感知设备安装和使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【态势感知】流影态势感知设备安装和使用">
+<meta property="og:url" content="https://lusensec.github.io/2025/07/26/Blue-Team-Situational-Awareness-Liuying/index.html">
+<meta property="og:site_name" content="Lusen的小窝">
+<meta property="og:description" content="【态势感知】流影态势感知设备安装和使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lusensec.github.io/img/logo.jpg">
+<meta property="article:published_time" content="2025-07-26T02:55:05.000Z">
+<meta property="article:modified_time" content="2025-07-26T15:47:25.693Z">
+<meta property="article:author" content="Lusen">
+<meta property="article:tag" content="态势感知">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lusensec.github.io/img/logo.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lusensec.github.io/2025/07/26/Blue-Team-Situational-Awareness-Liuying/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【态势感知】流影态势感知设备安装和使用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-07-26 23:47:25'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="/css/mouse.css"><meta name="generator" content="Hexo 7.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/friend_404.gif" data-original="/img/logo.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">107</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">57</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E7%BA%A2%E9%98%9F%E5%85%A5%E4%BE%B5/"><i class="fa-fw fas fa-folder-open"></i><span> 红队入侵</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E8%93%9D%E9%98%9F%E5%BA%94%E6%80%A5/"><i class="fa-fw fas fa-folder-open"></i><span> 蓝队应急</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%AE%A1%E8%AE%A1/"><i class="fa-fw fas fa-folder-open"></i><span> 复现与审计</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 内网渗透</span></a></div><div class="menus_item"><a class="site-page" href="/categories/Python%E6%AD%A6%E5%99%A8%E5%BA%93/"><i class="fa-fw fas fa-folder-open"></i><span> Python武器库</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%85%8D%E6%9D%80%E4%B8%93%E6%A0%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 免杀专栏</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 靶场系列</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/Vulnhub%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Vulnhub系列靶场</span></a></li><li><a class="site-page child" href="/categories/OSCP%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> OSCP系列靶场</span></a></li><li><a class="site-page child" href="/categories/Vulfocus%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Vulfocus系列靶场</span></a></li><li><a class="site-page child" href="/categories/%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> 应急靶场</span></a></li><li><a class="site-page child" href="/categories/%E7%8E%84%E6%9C%BA%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> 玄机应急靶场</span></a></li><li><a class="site-page child" href="/categories/Hackthebox%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Hackthebox系列靶场</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/CTF%E7%AB%9E%E8%B5%9B/"><i class="fa-fw fas fa-folder-open"></i><span> CTF竞赛</span></a></li><li><a class="site-page child" href="/categories/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%99%A8/"><i class="fa-fw fas fa-folder-open"></i><span> 漏洞扫描器</span></a></li><li><a class="site-page child" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><i class="fa-fw fas fa-folder-open"></i><span> 基础知识</span></a></li><li><a class="site-page child" href="/categories/%E5%85%B6%E4%BB%96%E7%BB%8F%E9%AA%8C/"><i class="fa-fw fas fa-folder-open"></i><span> 其他经验</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: /img/"><nav id="nav"><span id="blog-info"><a href="/" title="Lusen的小窝"><span class="site-name">Lusen的小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E7%BA%A2%E9%98%9F%E5%85%A5%E4%BE%B5/"><i class="fa-fw fas fa-folder-open"></i><span> 红队入侵</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E8%93%9D%E9%98%9F%E5%BA%94%E6%80%A5/"><i class="fa-fw fas fa-folder-open"></i><span> 蓝队应急</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%AE%A1%E8%AE%A1/"><i class="fa-fw fas fa-folder-open"></i><span> 复现与审计</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 内网渗透</span></a></div><div class="menus_item"><a class="site-page" href="/categories/Python%E6%AD%A6%E5%99%A8%E5%BA%93/"><i class="fa-fw fas fa-folder-open"></i><span> Python武器库</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%85%8D%E6%9D%80%E4%B8%93%E6%A0%8F/"><i class="fa-fw fas fa-folder-open"></i><span> 免杀专栏</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 靶场系列</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/Vulnhub%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Vulnhub系列靶场</span></a></li><li><a class="site-page child" href="/categories/OSCP%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> OSCP系列靶场</span></a></li><li><a class="site-page child" href="/categories/Vulfocus%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Vulfocus系列靶场</span></a></li><li><a class="site-page child" href="/categories/%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> 应急靶场</span></a></li><li><a class="site-page child" href="/categories/%E7%8E%84%E6%9C%BA%E5%BA%94%E6%80%A5%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> 玄机应急靶场</span></a></li><li><a class="site-page child" href="/categories/Hackthebox%E7%B3%BB%E5%88%97%E9%9D%B6%E5%9C%BA/"><i class="fa-fw fas fa-folder-open"></i><span> Hackthebox系列靶场</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/CTF%E7%AB%9E%E8%B5%9B/"><i class="fa-fw fas fa-folder-open"></i><span> CTF竞赛</span></a></li><li><a class="site-page child" href="/categories/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%99%A8/"><i class="fa-fw fas fa-folder-open"></i><span> 漏洞扫描器</span></a></li><li><a class="site-page child" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><i class="fa-fw fas fa-folder-open"></i><span> 基础知识</span></a></li><li><a class="site-page child" href="/categories/%E5%85%B6%E4%BB%96%E7%BB%8F%E9%AA%8C/"><i class="fa-fw fas fa-folder-open"></i><span> 其他经验</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【态势感知】流影态势感知设备安装和使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-07-26T02:55:05.000Z" title="发表于 2025-07-26 10:55:05">2025-07-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-07-26T15:47:25.693Z" title="更新于 2025-07-26 23:47:25">2025-07-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%93%9D%E9%98%9F%E5%BA%94%E6%80%A5/">蓝队应急</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">369</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【态势感知】流影态势感知设备安装和使用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一、流影态势感知介绍"><a href="#一、流影态势感知介绍" class="headerlink" title="一、流影态势感知介绍"></a>一、流影态势感知介绍</h1><p>引用官方原话：<a target="_blank" rel="noopener" href="https://abyssalfish-os.github.io/about/">流影: 流影 Flow Shadow</a></p>
+<blockquote>
+<p>面向全行业用户的一站式网络安全态势感知与网络行为可视化综合分析平台</p>
+</blockquote>
+<p>国内开源的态势感知系统仅此一家，但文档写的不是很清楚，配置操作难度比较大，也没有交流群和客服，很多问题难以解决，但是用来体验和学习用还是相当不错的。</p>
+<h1 id="二、流影态势感知单机版安装"><a href="#二、流影态势感知单机版安装" class="headerlink" title="二、流影态势感知单机版安装"></a>二、流影态势感知单机版安装</h1><p>去掉繁琐的安装步骤，我们直接使用已经配置好的单节点VMware虚拟机镜像版</p>
+<p>镜像下载：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1PpdnvV-cCQYR6kL1nJ11_A">单节点VMware虚拟机镜像版</a></p>
+<p>提取码：AFOS</p>
+<blockquote>
+<p>注意：在VM打开该镜像之前，推荐先增加虚拟机的内存和处理器，以提高性能。</p>
+</blockquote>
+<p>虚拟机用户名：<code>root</code>，密码：<code>ShyLiuying</code></p>
+<p>关闭防火墙：<code>systemctl stop firewalld</code></p>
+<h1 id="三、流影态势感知使用和流量捕获"><a href="#三、流影态势感知使用和流量捕获" class="headerlink" title="三、流影态势感知使用和流量捕获"></a>三、流影态势感知使用和流量捕获</h1><p>查看流量捕获网卡信息：<code>ps aux | grep lyprobe</code></p>
+<p><img src="/img/friend_404.gif" data-original="/img/Blue-Team-Situational-Awareness-Liuying/image-20250726113408416.png" alt="image-20250726113408416"></p>
+<p>可以看到，捕获的是ens34这张网卡的信息</p>
+<p>对应的IP段就是：<code>192.168.200.12/24</code>，则流影将会捕获这个IP段之内的所有流量</p>
+<p>访问<code>http://192.168.200.12:18080/ui</code>，账号密码：<code>admin/LoginLY@2016</code></p>
+<p><img src="/img/friend_404.gif" data-original="/img/Blue-Team-Situational-Awareness-Liuying/image-20250726113659187.png" alt="image-20250726113659187"></p>
+<p>目前是空流量，啥也没有</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Blue-Team-Situational-Awareness-Liuying/image-20250726113841366.png" alt="image-20250726113841366"></p>
+<p>为了演示，我将使用Xray 对 <code>192.168.200.226</code>的 pikachu 靶场进行手动测试</p>
+<p><img src="/img/friend_404.gif" data-original="/img/Blue-Team-Situational-Awareness-Liuying/image-20250726114250303.png" alt="image-20250726114250303"></p>
+<p>我们发起了XSS、SQL、RCE等常见测试</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lusensec.github.io">Lusen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://lusensec.github.io/2025/07/26/Blue-Team-Situational-Awareness-Liuying/">https://lusensec.github.io/2025/07/26/Blue-Team-Situational-Awareness-Liuying/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://lusensec.github.io" target="_blank">Lusen的小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5/">态势感知</a></div><div class="post_share"><div class="social-share" data-image="/img/logo.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2025/07/09/Red-Team-Invasion-AWVS/" title="【红队入侵】AWVS一键添加多目标扫描"><img class="cover" src="/img/friend_404.gif" data-original="/img/awvs.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【红队入侵】AWVS一键添加多目标扫描</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/friend_404.gif" data-original="/img/logo.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Lusen</div><div class="author-info__description">学无止境</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">107</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">57</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Lusensec" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://wpa.qq.com/msgrd?v=3&amp;uin=811209815&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:811209815@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章和相关工具仅供学习参考，禁止用于其他！！！未经授权禁止利用文章中的技术或工具对任何计算机或其他终端系统进行入侵操作，否则造成的直接或间接的后果和损失，均由使用者本人承担，本人不为此承担任何责任。如需转载或传播文章，需保证文章的完整性！文章如有侵权行为，请联系告知，我们会立即删除或修改并致歉！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%B5%81%E5%BD%B1%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%E4%BB%8B%E7%BB%8D"><span class="toc-text">一、流影态势感知介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%B5%81%E5%BD%B1%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%E5%8D%95%E6%9C%BA%E7%89%88%E5%AE%89%E8%A3%85"><span class="toc-text">二、流影态势感知单机版安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%B5%81%E5%BD%B1%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%E4%BD%BF%E7%94%A8%E5%92%8C%E6%B5%81%E9%87%8F%E6%8D%95%E8%8E%B7"><span class="toc-text">三、流影态势感知使用和流量捕获</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/07/26/Blue-Team-Situational-Awareness-Liuying/" title="【态势感知】流影态势感知设备安装和使用"><div style="background: /img/"></div></a><div class="content"><a class="title" href="/2025/07/26/Blue-Team-Situational-Awareness-Liuying/" title="【态势感知】流影态势感知设备安装和使用">【态势感知】流影态势感知设备安装和使用</a><time datetime="2025-07-26T02:55:05.000Z" title="发表于 2025-07-26 10:55:05">2025-07-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/09/Red-Team-Invasion-AWVS/" title="【红队入侵】AWVS一键添加多目标扫描"><img src="/img/friend_404.gif" data-original="/img/awvs.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【红队入侵】AWVS一键添加多目标扫描"/></a><div class="content"><a class="title" href="/2025/07/09/Red-Team-Invasion-AWVS/" title="【红队入侵】AWVS一键添加多目标扫描">【红队入侵】AWVS一键添加多目标扫描</a><time datetime="2025-07-09T02:23:45.000Z" title="发表于 2025-07-09 10:23:45">2025-07-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/02/VulnRep-CVE-2025-32463/" title="【漏洞复现】CVE-2025-32462/CVE-2025-32463漏洞复现"><img src="/img/friend_404.gif" data-original="/img/23.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【漏洞复现】CVE-2025-32462/CVE-2025-32463漏洞复现"/></a><div class="content"><a class="title" href="/2025/07/02/VulnRep-CVE-2025-32463/" title="【漏洞复现】CVE-2025-32462/CVE-2025-32463漏洞复现">【漏洞复现】CVE-2025-32462/CVE-2025-32463漏洞复现</a><time datetime="2025-07-02T11:49:05.000Z" title="发表于 2025-07-02 19:49:05">2025-07-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/14/Red-Team-Invasion-fofa/" title="【信息收集】永久会员FOFA信息收集"><img src="/img/friend_404.gif" data-original="/img/fofa.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【信息收集】永久会员FOFA信息收集"/></a><div class="content"><a class="title" href="/2025/06/14/Red-Team-Invasion-fofa/" title="【信息收集】永久会员FOFA信息收集">【信息收集】永久会员FOFA信息收集</a><time datetime="2025-06-14T08:08:35.000Z" title="发表于 2025-06-14 16:08:35">2025-06-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/06/13/Nouns-accelerate/" title="【基础知识】常用加速方式"><img src="/img/friend_404.gif" data-original="/img/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【基础知识】常用加速方式"/></a><div class="content"><a class="title" href="/2025/06/13/Nouns-accelerate/" title="【基础知识】常用加速方式">【基础知识】常用加速方式</a><time datetime="2025-06-12T17:22:49.000Z" title="发表于 2025-06-13 01:22:49">2025-06-13</time></div></div></div></div></div></div></main><footer id="footer" style="background: /img/"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Lusen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><div class="js-pjax"><script>(() => {
+  const initGitalk = () => {
+    const gitalk = new Gitalk(Object.assign({
+      clientID: 'Ov23li2aqUZ7ZPOWWmQN',
+      clientSecret: '475230627a309622f6670ff36d2ea102226a3d1d',
+      repo: 'lusensec.github.io',
+      owner: 'Lusensec',
+      admin: ['Lusensec'],
+      id: '620fda39730a4b1b44a2a640788281b1',
+      updateCountCallback: commentCount
+    },))
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async() => {
+    if (typeof Gitalk === 'function') initGitalk()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js')
+      initGitalk()
+    }
+  }
+  
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  if ('Gitalk' === 'Gitalk' || !true) {
+    if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="true" data-text="富强💖,民主💖,文明💖,和谐💖,平等💖,公正💖,法治💖,爱国💖,敬业💖,诚信💖,友善💖" data-fontsize="20px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,d=o();function o(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=o());for(var e,i=0;i<d.length;i++)0<=(e=(e=d[i]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,a,n,o=d[i];e=function(){d=d.filter(function(t){return o!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(o)},(t=o).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,n=t.getAttribute("data-original"),a.onload=function(){t.src=n,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=n},t.src!==n&&(a.src=n)))}()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)}(this);</script></body></html>
